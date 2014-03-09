@@ -1,0 +1,129 @@
+var search_value;
+function ajax2(url,containerid,show_url,goto_container){
+	search_value=url;
+	var page_request = false;
+	var temp;
+	var temp2;
+	if (window.XMLHttpRequest){page_request = new XMLHttpRequest();}
+	else if (window.ActiveXObject){
+		try{page_request = new ActiveXObject("Msxml2.XMLHTTP");}
+		catch (e){
+			try{page_request = new ActiveXObject("Microsoft.XMLHTTP");}
+			catch (e){}
+		}
+	}
+	else{return false;}
+	if(url==""){
+		temp2= location.hash;
+		temp= temp2.split( '#' );
+		url=temp[1];
+		if(url==undefined){url="";}
+	}
+	if(url!=""){
+		var url2=url;
+		if(goto_container==1){location.hash="#" + containerid;}
+		if(show_url==1){location.hash="#" + url;}
+		var loadstatustext="[Loading...]";
+		page_request.onreadystatechange=function(){
+			if(goto_container==2){
+				loadpage_ads(page_request, containerid, url2);
+			}
+			else{
+				document.getElementById(containerid).innerHTML=loadstatustext;
+				loadpage(page_request, containerid, url2);
+			}
+		}
+		url="/ajax/"+url+"/"+new Date().getTime()+".htm";
+		page_request.open('GET', url, true);
+		page_request.send(null);
+	}
+}
+function ajax(url,containerid,show_url,goto_container){
+	var page_request = false;
+	var temp;
+	var temp2;
+	if (window.XMLHttpRequest){page_request = new XMLHttpRequest();}
+	else if (window.ActiveXObject){
+		try{page_request = new ActiveXObject("Msxml2.XMLHTTP");}
+		catch (e){
+			try{page_request = new ActiveXObject("Microsoft.XMLHTTP");}
+			catch (e){}
+		}
+	}
+	else{return false;}
+	if(url==""){
+		temp2= location.hash;
+		temp= temp2.split( '#' );
+		url=temp[1];
+		if(url==undefined){url="";}
+	}
+	if(url!=""){
+		var url2=url;
+		if(goto_container==1){location.hash="#" + containerid;}
+		if(show_url==1){location.hash="#" + url;}
+		var loadstatustext="[Loading...]";
+		page_request.onreadystatechange=function(){
+			if(goto_container==2){
+				loadpage_ads(page_request, containerid, url2);
+			}
+			else{
+				document.getElementById(containerid).innerHTML=loadstatustext;
+				loadpage(page_request, containerid, url2);
+			}
+		}
+		url="/ajax/"+url+"/"+new Date().getTime()+".htm";
+		page_request.open('GET', url, true);
+		page_request.send(null);
+	}
+}
+function loadpage(page_request, containerid, url2){
+	try{
+		if (page_request.readyState == 4 && (page_request.status==200 || window.location.href.indexOf("http")==-1)){
+			document.getElementById(containerid).innerHTML=page_request.responseText;
+			parseScript(page_request.responseText);
+		}
+		else if (page_request.readyState == 4 && (page_request.status!=200 || window.location.href.indexOf("http")!=-1)){}
+	}
+	catch(e){}
+}
+function loadpage_ads(page_request, containerid, url2){
+	try{
+		if (page_request.readyState == 4 && (page_request.status==200 || window.location.href.indexOf("http")==-1)){
+			if(containerid=="adsc2"){
+				document.getElementById("adsc2").innerHTML=page_request.responseText;
+				ajax("view/get_ads/r/main","adsr",0,2);
+			}
+			else if(containerid=="adsr"){
+				document.getElementById("adsr").innerHTML=page_request.responseText;
+			}
+		}
+		else if (page_request.readyState == 4 && (page_request.status!=200 || window.location.href.indexOf("http")!=-1)){}
+	}
+	catch(e){}
+}
+
+function parseScript(strcode) {
+  var scripts = new Array();
+  while(strcode.indexOf("<script") > -1 || strcode.indexOf("</script") > -1) {
+    var s = strcode.indexOf("<script");
+    var s_e = strcode.indexOf(">", s);
+    var e = strcode.indexOf("</script", s);
+    var e_e = strcode.indexOf(">", e);
+    
+    // Add to scripts array
+    scripts.push(strcode.substring(s_e+1, e));
+    // Strip from strcode
+    strcode = strcode.substring(0, s) + strcode.substring(e_e+1);
+  }
+  
+  // Loop through every script collected and eval it
+  for(var i=0; i<scripts.length; i++) {
+    try {
+      eval(scripts[i]);
+    }
+    catch(ex) {
+      // do what you want here when a script fails
+    }
+  }
+}
+var this_site_url="";
