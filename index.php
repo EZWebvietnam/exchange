@@ -202,11 +202,11 @@ if (defined('ENVIRONMENT'))
  */
  if($_SERVER['SERVER_NAME'] == 'localhost')
  {
-     define('DB_NAME','webmarketing');
+     define('DB_NAME','exchange');
      define('DB_USER','root');
      define('DB_PASS','');
-     define('ROT_DIR','/webmarketing/');
-     define('BASE_URL','http://localhost/webmarketing/');
+     define('ROT_DIR','/exchange/');
+     define('BASE_URL','http://localhost/exchange/');
  }
  else
  {
