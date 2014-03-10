@@ -89,7 +89,7 @@
 
                         if ($email_activation) {                                    // send "activate" email
                             $data['activation_period'] = $this->config->item('email_activation_expire', 'tank_auth') / 3600;
-                            $this->_send_email('activate',$this->form_validation->set_value('sEmail'),$data['email'], $data);
+                            $this->_send_email('activate',$this->form_validation->set_value('sEmail'),$data['email'], $data,'Đăng Ký Tài Khoản Thành Công');
                             unset($data['password']); // Clear password (just for any case)
 
                             $this->_show_message($this->lang->line('auth_message_registration_completed_1'));
@@ -184,12 +184,12 @@
                 $this->_show_message($this->lang->line('auth_message_activation_failed'));
             }
         }
-        function _send_email($type, $to,$email, &$data)
+        function _send_email($type, $to,$email, &$data,$title)
         {
             $this->load->library('email');
             $this->load->library('maillinux');
             $from = 'nguyentruonggiang91@gmail.com';
-            $subject = 'Register Account Success';
+            $subject = $title;
             $messsage = $this->load->view('email/'.$type.'-html', $data, TRUE);
             $this->maillinux->SendMail($from,$email,$subject,$messsage);
 
