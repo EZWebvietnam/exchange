@@ -97,11 +97,11 @@ class Tank_auth
 					}
 				} else {														// fail - wrong password
 					$this->increase_login_attempt($login);
-					$this->error = array('password' => 'auth_incorrect_password');
+					$this->error = array('pwd'=> 'auth_incorrect_password');
 				}
 			} else {															// fail - wrong login
 				$this->increase_login_attempt($login);
-				$this->error = array('login' => 'auth_incorrect_login');
+				$this->error = array('username' => 'auth_incorrect_login');
 			}
 		}
 		return FALSE;
@@ -173,7 +173,7 @@ class Tank_auth
 	 * @param	bool
 	 * @return	array
 	 */
-	function create_user($username, $email, $password,$fullname,$phone,$role,$email_activation)
+	function create_user($username, $email, $password,$email_activation,$role)
 	{
 		if ((strlen($username) > 0) AND !$this->ci->users->is_username_available($username)) {
 			$this->error = array('username' => 'auth_username_in_use');
@@ -192,10 +192,8 @@ class Tank_auth
 				'username'	=> $username,
 				'password'	=> $hashed_password,
 				'email'		=> $email,
-                'full_name'=>$fullname,
-                'phone'=>$phone,
 				'last_ip'	=> $this->ci->input->ip_address(),
-                'activated'=>1,
+                'activated'=>0,
                 'role'=>$role
 			);
 

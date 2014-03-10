@@ -7,12 +7,12 @@
 <link rel="shortcut icon" href="http://id.gamebank.vn/favicon.ico" type="image/vnd.microsoft.icon" />
 
 <link hi rel="stylesheet" type="text/css" href="<?php echo base_url();?>template/ezwebvietnam/home/libs/css/style-1.11.css"/>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>template/ezwebvietnam/home//css/keyboard.min.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>template/ezwebvietnam/home/libs/css/keyboard.min.css"/>
 <script type="text/javascript">
    var IMG_URL = 'http://id.gamebank.vn';
 </script>
 <script type="text/javascript" src="<?php echo base_url();?>template/ezwebvietnam/home/libs/js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>template/ezwebvietnam/home//js/error_message_html5.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>template/ezwebvietnam/home/libs/js/error_message_html5.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>template/ezwebvietnam/home/libs/js/js-1.0.2.min.js"></script>
 
 </head>
@@ -106,7 +106,74 @@ $(document).ready(function() {
     <div class="clear"></div>
   </div>
   <div class="body-block" id="body-block">
-  <form id="frmRegister" name="frmRegister" action="" method="post">
+  <form id="frmRegister" name="frmRegister" method="post">
+  <?php 
+  //Create Form
+      $username = array(
+        'name'    => 'username',
+        'id'    => 'username',
+        'value' => set_value('username'),
+        'maxlength'    => $this->config->item('username_max_length', 'tank_auth'),
+        'size'    => 30,
+        'required'=>'',
+        'pattern'=>"[a-zA-Z0-9\_\.]{6,24}",
+        'oninput'=>"check_valid_input(this,'showname')",
+        "oninvalid"=>"check_valid_input(this,'showname')",
+        "title"=>"Tên đăng nhập sử dụng chữ cái, chữ số, gạch dưới và dấu chấm. Chiều dài từ 6-24 ký tự.",
+        "class"=>"txt-input txt_260 txtfiealdregister",
+        "id"=>"sUserName"
+    );
+    $displayname = array(
+    'name'    => 'displayname',
+    'id'    => 'displayname',
+    'value'    => set_value('displayname'),
+    'maxlength'    => 80,
+    'size'    => 30,
+    'required'=>'',
+    'pattern'=>"[a-zA-Z0-9\_\.]{6,24}",
+    'oninput'=>"check_valid_input(this,'showname')",
+    "oninvalid"=>"check_valid_input(this,'showname')",
+    "title"=>"Tên hiển thị sử dụng chữ cái, chữ số, gạch dưới và dấu chấm. Chiều dài từ 6-24 ký tự.",
+     "class"=>"txt-input txt_260 txtfiealdregister",
+     "id"=>"sShowName");
+     $password = array(
+    'name'    => 'sPassWord1',
+    'type'=>'password',
+    'id'    => 'sPassWord1',
+    'value' => set_value('sPassWord1'),
+    'maxlength'    => $this->config->item('password_max_length', 'tank_auth'),
+    'size'    => 30,
+    'required'=>'',
+    'pattern'=>"[a-zA-Z0-9\_\.]{6,24}",
+    'oninput'=>"check_valid_input(this,'pass1')",
+    "oninvalid"=>"check_valid_input(this,'pass1')",
+     "class"=>"txt-input txt_260 txtfiealdregister",
+    );
+    $confirm_password = array(
+        'name'    => 'sConfirm_PassWord1',
+        'type'=>'password',
+        'value' => set_value('sConfirm_PassWord1'),
+        'maxlength'    => $this->config->item('password_max_length', 'tank_auth'),
+        'size'    => 30,
+        'required'=>'',
+        'pattern'=>"[a-zA-Z0-9\_\.]{6,24}",
+        'oninput'=>"check_valid_input(this,'re_pass1')",
+        "oninvalid"=>"check_valid_input(this,'re_pass1')",
+         "class"=>"txt-input txt_260 txtfiealdregister",
+         "id"=>"sConfirm_PassWord1"
+    );
+    $email = array(
+    'name'    => 'sEmail',
+    'id'    => 'sEmail',
+    'value'    => set_value('sEmail'),
+    'maxlength'    => 80,
+    'size'    => 30,
+    'required'=>'',
+    'oninput'=>"check_valid_input(this,'email')",
+    "oninvalid"=>"check_valid_input(this,'email')",
+     "class"=>"txt-input txt_260 txtfiealdregister",
+     "id"=>"sEmail");
+  ?>
     <p style="font-size: 16px; margin: 5px 0px 0px 20px;">Chào Bạn! Chỉ cần vài bước đơn giản là bạn sẽ có ngay một tài khoản Gamebank.</p>
     <div class="note_label" style="margin: 10px 0px 0px 20px;">(<span class="note_text">*</span>) Thông tin bắt buộc nhập</div>
     <div class="message"></div>
@@ -116,7 +183,7 @@ $(document).ready(function() {
     <div class="div-pro">
       <div class="label-pro" style='color: #199914;'>Tài khoản đăng nhập <span class="note_text">*</span></div>
       <div class="content-pro">
-        <input style='box-shadow: 0px 0px 10px #199914;' required pattern="[a-zA-Z0-9\_\.]{6,24}" oninput="check_valid_input(this,'username');" oninvalid="check_valid_input(this,'username');" title='Tên đăng nhập sử dụng chữ cái, chữ số, gạch dưới và dấu chấm. Chiều dài từ 6-24 ký tự.' class="txt-input txtfiealdregister" style="border-width:2px;" id="sUserName" maxlength="24" name="sUserName" value="">
+        <?php echo form_input($username); ?>
       </div>
       <div class="field-error" id="username-error"></div>
       <div class="field-success" id="username-success"></div>
@@ -132,7 +199,7 @@ $(document).ready(function() {
     <div class="div-pro">
       <div class="label-pro">Tên hiển thị <span class="note_text">*</span></div>
       <div class="content-pro">
-        <input required pattern="[a-zA-Z0-9\_\.]{6,24}" oninput="check_valid_input(this,'showname');" oninvalid="check_valid_input(this,'showname');" title='Tên hiển thị sử dụng chữ cái, chữ số, gạch dưới và dấu chấm. Chiều dài từ 6-24 ký tự.' class="txt-input txt_260 txtfiealdregister" id="sShowName" maxlength="24" name="sShowName" value="">
+       <?php echo form_input($displayname); ?> 
       </div>
       <div class="field-error" id="showname-error"></div>
       <div class="field-success" id="showname-success"></div>
@@ -147,7 +214,7 @@ $(document).ready(function() {
     <div class="div-pro">
       <div class="label-pro">Mật khẩu cấp 1 <span class="note_text">*</span></div>
       <div class="content-pro">
-        <input required oninput="check_valid_input(this,'pass1');" oninvalid="check_valid_input(this,'pass1');" class="txt-input txtfiealdregister" id="sPassWord1" maxlength="32" name="sPassWord1" type="password" value="">
+        <?php echo form_input($password); ?>
       </div>
       <div class="stronglevel">
         <div class="text_pass">&nbsp;Mức độ bảo mật</div>
@@ -166,33 +233,7 @@ $(document).ready(function() {
     <div class="div-pro">
       <div class="label-pro">Xác nhận mật khẩu cấp 1 <span class="note_text">*</span></div>
       <div class="content-pro">
-        <input required oninput="check_valid_pass(this, 'sPassWord1');" oninvalid="check_valid_pass(this, 'sPassWord1');" class="txt-input txt_160 txtfiealdregister" id="sConfirm_PassWord1" maxlength="32" name="sConfirm_PassWord1" type="password" value="">
-      </div>
-      <div class="clear"></div>
-    </div>
-    <div class="div-pro">
-      <div class="label-pro">Mật khẩu cấp 2 <span class="note_text">*</span></div>
-      <div class="content-pro">
-        <input required oninput="check_valid_input(this,'pass2');" oninvalid="check_valid_input(this,'pass2');" class="txt-input txt_160 txtfiealdregister" id="sPassWord2" maxlength="32" name="sPassWord2" type="password" value="">
-      </div>
-      <div class="stronglevel">
-        <div class="text_pass">&nbsp;Mức độ bảo mật</div>
-        <div class="meter" id="meta12"></div>
-        <div class="meter" id="meta22"></div>
-        <div class="meter" id="meta32"></div>
-        <div class="meter" id="meta42"></div>
-      </div>
-      <div class="clear"></div>
-    </div>
-    <div class='note' id='note_pass2'>
-      <img src="http://id.gamebank.vn/libs/images/bg_arrow.gif" />
-      - Để mật khẩu an toàn hơn, bạn nên sử dụng: chữ cái, số, hoa và thường lẫn lộn, ký tự đặc biệt (*,%,...).<br />
-      - Không gõ tiếng việt có dấu. Phải từ 6-32 ký tự và không được trùng với mật khẩu cấp 1.
-    </div>
-    <div class="div-pro">
-      <div class="label-pro">Xác nhận mật khẩu cấp 2 <span class="note_text">*</span></div>
-      <div class="content-pro">
-        <input required oninput="check_valid_pass(this, 'sPassWord2');" oninvalid="check_valid_pass(this, 'sPassWord2');" class="txt-input txt_160 txtfiealdregister" id="sConfirm_PassWord2" maxlength="32" name="sConfirm_PassWord2" type="password"  value="">
+        <?php echo form_input($confirm_password); ?>
       </div>
       <div class="clear"></div>
     </div>
@@ -202,7 +243,7 @@ $(document).ready(function() {
     <div class="div-pro">
       <div class="label-pro">Email <span class="note_text">*</span></div>
       <div class="content-pro">
-        <input type='email' required oninput="check_valid_input(this,'email');" oninvalid="check_valid_input(this,'email');" class="txt-input txt_260 txtfiealdregister" id="sEmail" maxlength="50" name="sEmail" value="">
+        <?php echo form_input($email); ?> 
       </div>
       <div class="field-error" id="email-error"></div>
       <div class="field-success" id="email-success"></div>
@@ -216,7 +257,7 @@ $(document).ready(function() {
     <div class="div-pro">
       <div class="label-pro">Ngày/Tháng/Năm Sinh <span class="note_text">*</span></div>
       <div class="content-pro">
-        <select style='width:80px;' required onselect="check_valid_input(this,'date');" oninvalid="check_valid_input(this,'date');" class="select-input txtfiealdregister" name="dName" id="dName">
+        <select style='width:80px;'  onselect="check_valid_input(this,'date');" oninvalid="check_valid_input(this,'date');" class="select-input txtfiealdregister" name="dName" id="dName">
           <option value="">[-Ngày-]</option>
                       <option value="1" >1 </option>
                       <option value="2" >2 </option>
@@ -251,7 +292,7 @@ $(document).ready(function() {
                       <option value="31" >31 </option>
                  </select>
 
-        <select style='width:80px;' required onselect="check_valid_input(this,'month');" oninvalid="check_valid_input(this,'month');" class="select-input select_100 txtfiealdregister" id="mName" name="mName">
+        <select style='width:80px;'  onselect="check_valid_input(this,'month');" oninvalid="check_valid_input(this,'month');" class="select-input select_100 txtfiealdregister" id="mName" name="mName">
           <option value="">[-Tháng-]</option>
                       <option value="1" >Tháng 1</option>
                       <option value="2" >Tháng 2</option>
@@ -267,7 +308,7 @@ $(document).ready(function() {
                       <option value="12" >Tháng 12</option>
                   </select>
 
-        <select style='width:80px;' required onselect="check_valid_input(this,'year');" oninvalid="check_valid_input(this,'year');" class="select-input txtfiealdregister" name="yName" id="yName">
+        <select style='width:80px;'  onselect="check_valid_input(this,'year');" oninvalid="check_valid_input(this,'year');" class="select-input txtfiealdregister" name="yName" id="yName">
           <option value="">[-Năm-]</option>
                       <option value="2014" >2014</option>
                       <option value="2013" >2013</option>
@@ -376,106 +417,12 @@ $(document).ready(function() {
     <div class="title-body-block-left"><h3>Thông tin chứng thực</h3></div>
     <div class="title-body-block-right">&nbsp;</div>
     <div class="clear"></div>
-        <div class="div-pro">
-      <div class="label-pro">Số điện thoại <span class="note_text">*</span></div>
-      <div class="content-pro">
-        <input required pattern="[0-9]{9,12}" oninput="check_valid_input(this,'sdt');" oninvalid="check_valid_input(this,'sdt');" class="txt-input txt_260 txtfiealdregister"  value="" maxlength="15" id="sPhone" name="phone" type="text">
-      </div>
-      <div class="field-error" id="phone-error"></div>
-      <div class="field-success" id="phone-success"></div>
-      <div class="clear"></div>
-    </div>
+   
     <div class='note' id='note_phone'>
       <img src="http://id.gamebank.vn/libs/images/bg_arrow.gif" />
       - Chỉ nhập số <b>Di động</b> để nhận SMS.<br />
       - Số này cần phải chưa đăng ký với Gamebank. <br />
       - Chúng tôi sẽ gửi thông tin xác thực tới số điện thoại này.
-    </div>
-        <div class="div-pro">
-      <div class="label-pro">Số chứng minh nhân dân <span class="note_text">*</span></div>
-      <div class="content-pro">
-        <input required oninput="check_valid_input(this,'cmnd');" oninvalid="check_valid_input(this,'cmnd');" class="txt-input txt_260 txtfiealdregister"  value="" maxlength="15" id="sPersonalId" name="sPersonalId" type="text">
-      </div>
-      <div class="field-error" id="cmnd-error"></div>
-      <div class="field-success" id="cmnd-success"></div>
-      <div class="clear"></div>
-    </div>
-    <div class='note' id='note_cmnd'>
-      <img src="http://id.gamebank.vn/libs/images/bg_arrow.gif" />
-      Gamebank dùng <strong>số CMND</strong> này để xác nhận việc sở hữu tài khoản của bạn.
-    </div>
-    <div class="div-pro">
-      <div class="label-pro">Nơi cấp</div>
-      <div class="content-pro">
-        <select required oninvalid="check_valid_input(this,'RegionIssue');" class="select-input select_300 txtfiealdregister" style="width: 250px;" name="sRegionIssue" id="sRegionIssue">
-          <option value="">[- Nơi cấp -]</option>
-                      <option value="1" >Hà Nội</option>
-                      <option value="4" >Hồ Chí Minh</option>
-                      <option value="5" >An Giang</option>
-                      <option value="6" >Bà Rịa Vũng Tàu</option>
-                      <option value="7" >Bắc Cạn</option>
-                      <option value="8" >Bắc Giang</option>
-                      <option value="9" >Bạc Liêu</option>
-                      <option value="10" >Bắc Ninh</option>
-                      <option value="11" >Bến Tre</option>
-                      <option value="12" >Bình Định</option>
-                      <option value="13" >Bình Dương</option>
-                      <option value="14" >Bình Phước</option>
-                      <option value="15" >Bình Thuận</option>
-                      <option value="16" >Cà Mau</option>
-                      <option value="17" >Cần Thơ</option>
-                      <option value="18" >Cao Bằng</option>
-                      <option value="19" >Đà Nẵng</option>
-                      <option value="20" >Đăk Lăk</option>
-                      <option value="21" >Điện Biên</option>
-                      <option value="22" >Đồng Nai</option>
-                      <option value="23" >Đồng Tháp</option>
-                      <option value="25" >Gia Lai</option>
-                      <option value="26" >Hà Đông</option>
-                      <option value="27" >Hà Giang</option>
-                      <option value="28" >Hạ Long</option>
-                      <option value="29" >Hà Nam</option>
-                      <option value="30" >Hà Tĩnh</option>
-                      <option value="31" >Hải Dương</option>
-                      <option value="32" >Hải Phòng</option>
-                      <option value="33" >Hòa Bình</option>
-                      <option value="34" >Hưng Yên</option>
-                      <option value="35" >Khánh Hòa</option>
-                      <option value="36" >Kiên Giang</option>
-                      <option value="37" >Kon Tum</option>
-                      <option value="38" >Lai Châu</option>
-                      <option value="39" >Lâm Đồng</option>
-                      <option value="40" >Lạng Sơn</option>
-                      <option value="41" >Lào Cai</option>
-                      <option value="42" >Long An</option>
-                      <option value="43" >Nam Định</option>
-                      <option value="44" >Nghệ An</option>
-                      <option value="45" >Ninh Bình</option>
-                      <option value="46" >Ninh Thuận</option>
-                      <option value="47" >Phú Thọ</option>
-                      <option value="48" >Phú Yên</option>
-                      <option value="49" >Quảng Bình</option>
-                      <option value="50" >Quảng Nam</option>
-                      <option value="51" >Quảng Ngãi</option>
-                      <option value="52" >Quảng Ninh</option>
-                      <option value="53" >Quảng Trị</option>
-                      <option value="54" >Sóc Trăng</option>
-                      <option value="55" >Sơn La</option>
-                      <option value="56" >Tây Ninh</option>
-                      <option value="57" >Thái Bình</option>
-                      <option value="58" >Thái Nguyên</option>
-                      <option value="59" >Thanh Hóa</option>
-                      <option value="60" >Thừa Thiên Huế</option>
-                      <option value="61" >Tiền Giang</option>
-                      <option value="62" >Trà Vinh</option>
-                      <option value="63" >Tuyên Quang</option>
-                      <option value="64" >Vĩnh Long</option>
-                      <option value="65" >Vĩnh Phúc</option>
-                      <option value="66" >Yên Bái</option>
-                      <option value="67" >Nơi Khác</option>
-                  </select>
-      </div>
-      <div class="clear"></div>
     </div>
     <div class="div-pro">
       <div class="label-pro">Mã kiểm tra </div>
