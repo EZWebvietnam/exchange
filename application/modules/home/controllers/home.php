@@ -21,7 +21,6 @@
                 $this->data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') AND
                     $this->config->item('use_username', 'tank_auth'));
                 $this->data['login_by_email'] = $this->config->item('login_by_email', 'tank_auth');
-
                 $this->form_validation->set_rules('username', 'Login', 'trim|required|xss_clean');
                 $this->form_validation->set_rules('pwd', 'Password', 'trim|required|xss_clean');
                 // Get login for counting attempts to login
@@ -63,7 +62,11 @@
         }
         public function register()
         {
-            if (!$this->config->item('allow_registration', 'tank_auth')) {    // registration is off
+            if($this->tank_auth->is_logged_in())
+            {
+                 redirect('/');
+            }
+            else if (!$this->config->item('allow_registration', 'tank_auth')) {    // registration is off
                 $this->_show_message($this->lang->line('auth_message_registration_disabled'));
 
             } else {

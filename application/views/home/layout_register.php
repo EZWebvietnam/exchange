@@ -23,7 +23,7 @@
     <a href='http://gamebank.vn'><img src="http://id.gamebank.vn/logo.png" title="Gamebank" /></a>
 </div><!--end #-->
 <div id="banner">
-    <a href='http://id.gamebank.vn/policy' target='_new'><img src="http://id.gamebank.vn/libs/images/banner.png" title=""></a>
+    <a href='http://id.gamebank.vn/policy' target='_new'><img src="<?php echo base_url();?>template/ezwebvietnam/home/libs/images/banner.png" title=""></a>
 </div>
 </div>
 
@@ -81,7 +81,7 @@ $(document).ready(function() {
 </ul>
 
           <div id="language-list">
-              <img class="active" src="http://id.gamebank.vn/libs/images/vi.png" onclick="window.location.replace(window.location.pathname+'?l=vi');"/>&nbsp;&nbsp;
+              <img class="active" src="<?php echo base_url();?>template/ezwebvietnam/home/libs/images/vi.png" onclick="window.location.replace(window.location.pathname+'?l=vi');"/>&nbsp;&nbsp;
             </div>
     
 </div>
@@ -191,7 +191,7 @@ $(document).ready(function() {
       <div class="clear"></div>
     </div>
     <div class='note' id='note_username'>
-      <img src="http://id.gamebank.vn/libs/images/bg_arrow.gif" />
+      <img src="<?php echo base_url();?>template/ezwebvietnam/home/libs/images/bg_arrow.gif" />
       - <strong>Tài khoản đăng nhập</strong> này bạn có thể sử dụng cho tất cả các sản phẩm của Gamebank.<br />
       - Bạn có thể sử dụng chữ cái, chữ số, gạch dưới và dấu chấm. Chiều dài từ 6-24 ký tự.<br />
       <span><strong>Lưu ý:</strong> Tài khoản đăng nhập không được trùng với tên hiển thị.</span>
@@ -206,7 +206,7 @@ $(document).ready(function() {
       <div class="clear"></div>
     </div>
     <div class='note' id='note_showname'>
-      <img src="http://id.gamebank.vn/libs/images/bg_arrow.gif" />
+      <img src="<?php echo base_url();?>template/ezwebvietnam/home/libs/images/bg_arrow.gif" />
       - <strong>Tên hiển thị</strong> này bạn sử dụng để bảo mật tài khoản của bạn tại Gamebank.<br />
       - Bạn có thể sử dụng chữ cái, chữ số, gạch dưới và dấu chấm. Chiều dài từ 6-24 ký tự.<br />
       <span><strong>Lưu ý:</strong> Tên hiển thị và tên đăng nhập là khác nhau.</span>
@@ -226,7 +226,7 @@ $(document).ready(function() {
       <div class="clear"></div>
     </div>
     <div class='note' id='note_pass1'>
-      <img src="http://id.gamebank.vn/libs/images/bg_arrow.gif" />
+      <img src="<?php echo base_url();?>template/ezwebvietnam/home/libs/images/bg_arrow.gif" />
       - Để mật khẩu an toàn hơn, bạn nên sử dụng: chữ cái, số, hoa và thường lẫn lộn, ký tự đặc biệt (*,%,...).<br />
       - Không gõ tiếng việt có dấu. Phải từ 6-32 ký tự và không được trùng với mật khẩu cấp 2.
     </div>
@@ -250,7 +250,7 @@ $(document).ready(function() {
       <div class="clear"></div>
     </div>
     <div class='note' id='note_email'>
-      <img src="http://id.gamebank.vn/libs/images/bg_arrow.gif" />
+      <img src="<?php echo base_url();?>template/ezwebvietnam/home/libs/images/bg_arrow.gif" />
       - Chúng tôi sẽ gửi thư tới địa chỉ email này trong trường hợp bạn quên mật khẩu. <br />
       - <strong>Email</strong> phải chưa từng đăng ký với Gamebank.
     </div>
@@ -419,7 +419,7 @@ $(document).ready(function() {
     <div class="clear"></div>
    
     <div class='note' id='note_phone'>
-      <img src="http://id.gamebank.vn/libs/images/bg_arrow.gif" />
+      <img src="<?php echo base_url();?>template/ezwebvietnam/home/libs/images/bg_arrow.gif" />
       - Chỉ nhập số <b>Di động</b> để nhận SMS.<br />
       - Số này cần phải chưa đăng ký với Gamebank. <br />
       - Chúng tôi sẽ gửi thông tin xác thực tới số điện thoại này.
@@ -440,7 +440,7 @@ $(document).ready(function() {
       <div class="clear"></div>
     </div>
     <div class='note' id='note_captcha'>
-      <img src="http://id.gamebank.vn/libs/images/bg_arrow.gif" />
+      <img src="<?php echo base_url();?>template/ezwebvietnam/home/libs/images/bg_arrow.gif" />
       Khi nhập vào mã này, bạn sẽ giúp Gamebank ngăn chặn những đăng ký giả mạo.
     </div>
     <div style="text-align: center; margin: 15px 0px 30px 0px;">
