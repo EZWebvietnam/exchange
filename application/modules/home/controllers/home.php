@@ -15,7 +15,7 @@
         {
 
             if ($this->tank_auth->is_logged_in()) {                                    // logged in
-                redirect('/');
+                redirect('/thanh-vien');
             }
             else {
                 $this->data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') AND
@@ -42,7 +42,7 @@
                         0,
                         $this->data['login_by_username'],
                         $this->data['login_by_email'])) {                                // success
-                        redirect('/');
+                        redirect('/thanh-vien');
 
                     } else {
                         $errors = $this->tank_auth->get_error_message();
@@ -55,8 +55,6 @@
 
                     }
                 }
-
-                $this->data['main_content']='auth/login_form_1';
                 $this->load->view('home/layout_home', $this->data);
             }
         }
@@ -64,7 +62,7 @@
         {
             if($this->tank_auth->is_logged_in())
             {
-                 redirect('/');
+                redirect('/');
             }
             else if (!$this->config->item('allow_registration', 'tank_auth')) {    // registration is off
                 $this->_show_message($this->lang->line('auth_message_registration_disabled'));
@@ -79,6 +77,7 @@
                 $this->form_validation->set_rules('sPassWord1', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
                 $this->form_validation->set_rules('sConfirm_PassWord1', 'Confirm Password', 'trim|required|xss_clean|matches[sPassWord1]');
                 $this->data['errors'] = array();
+                $account_number = rand_account_number(13);
                 $email_activation = $this->config->item('email_activation', 'tank_auth');
                 if ($this->form_validation->run()) { 
 
@@ -157,13 +156,11 @@
                             $this->_show_message($this->lang->line('auth_message_banned').' '.$errors['banned']);
 
                         } else {                                                    // fail
-                            foreach ($errors as $k => $v)    $data['errors'][$k] = $this->lang->line($v);
+                            foreach ($errors as $k => $v)    $this->data['errors'][$k] = $this->lang->line($v);
                         }
 
                     }
                 }
-
-                $this->data['main_content']='auth/login_form_1';
                 $this->load->view('home_layout/member/login_layout', $this->data);
             }
         }
@@ -185,6 +182,12 @@
                 $this->_show_message($this->lang->line('auth_message_activation_failed'));
             }
         }
+        public function logout()
+        {
+            $this->tank_auth->logout();
+            $this->session->sess_create();
+            $this->_show_message($this->lang->line('auth_message_logged_out')); 
+        }
         function _send_email($type, $to,$email, &$data,$title)
         {
             $this->load->library('email');
@@ -195,10 +198,79 @@
             $this->maillinux->SendMail($from,$email,$subject,$messsage);
 
         }
+        public function change_pass()
+        {
+            if($this->input->post())
+            {
+                $this->form_validation->set_rules('old_password', 'Old Password', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+                $this->form_validation->set_rules('confirm_new_password', 'Confirm new Password', 'trim|required|xss_clean|matches[new_password]');
+                $this->data['errors'] = array();
+                if ($this->form_validation->run()) {
+                    $catpcha = $this->input->post('sVerifyCode');
+                    
+                    if($this->check_captcha($catpcha)==TRUE)
+                    {                                // validation ok
+                        if ($this->tank_auth->change_password(
+                            $this->form_validation->set_value('old_password'),
+                            $this->form_validation->set_value('new_password'))) {    // success
+                            $message = 'Thay đổi password thành công';
+                            $this->_show_message($message);
+                            $this->session->set_flashdata('message','Thay đổi password thành công');
+                            redirect('/thanh-vien');
+                        } else {                                                        // fail
+                            $errors = $this->tank_auth->get_error_message();
+                            foreach ($errors as $k => $v)    $this->data['errors'][$k] = $this->lang->line($v);
+                        }
+                    }
+                    else
+                    {
+                           $this->data['errors']['captcha'] = 'Wrong captcha code';
+                    }
+                }
+                $this->data['image'] = $this->_create_captcha();
+                $this->load->view('home/layout_changepass', $this->data);
+            }
+            else
+            {
+                $this->data['image'] = $this->_create_captcha();
+                $this->load->view('home/layout_changepass', $this->data);
+            }
+        }
         function _show_message($message)
         {
             $this->session->set_flashdata('message', $message);
             redirect('/');
+        }
+        private function _create_captcha()
+        {
+            // we will first load the helper. We will not be using autoload because we only need it here
+            $this->load->helper('captcha');
+            // we will set all the variables needed to create the captcha image
+            $options = array('img_path'=>$_SERVER['DOCUMENT_ROOT'].ROT_DIR.'/captcha/','img_url'=>base_url()."captcha/",'img_width'=>'150','img_height'=>'40','expiration'=>7200);
+            //now we will create the captcha by using the helper function create_captcha()
+            $cap = create_captcha($options);
+            
+            // we will store the image html code in a variable
+            $image = $cap['image'];
+
+            // ...and store the captcha word in a session
+            $this->session->set_userdata('captchaword', $cap['word']);
+            // we will return the image html code
+            return $image;
+        }
+        public function check_captcha($string)
+        {
+            
+            if($string==$this->session->userdata('captchaword'))
+            {
+                return TRUE;
+            }
+            else
+            {
+                $this->form_validation->set_message('check_captcha', 'Wrong captcha code');
+                return FALSE;
+            }
         }
     }
 ?>

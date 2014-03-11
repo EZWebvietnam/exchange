@@ -173,7 +173,7 @@ class Tank_auth
 	 * @param	bool
 	 * @return	array
 	 */
-	function create_user($username, $email, $password,$email_activation,$role)
+	function create_user($username, $email, $password,$email_activation,$role,$account_number)
 	{
 		if ((strlen($username) > 0) AND !$this->ci->users->is_username_available($username)) {
 			$this->error = array('username' => 'auth_username_in_use');
@@ -194,7 +194,8 @@ class Tank_auth
 				'email'		=> $email,
 				'last_ip'	=> $this->ci->input->ip_address(),
                 'activated'=>0,
-                'role'=>$role
+                'role'=>$role,
+                'account_number'=>$account_number
 			);
 
 			if ($email_activation) {
@@ -397,14 +398,11 @@ class Tank_auth
 					$this->ci->config->item('phpass_hash_strength', 'tank_auth'),
 					$this->ci->config->item('phpass_hash_portable', 'tank_auth'));
 			if ($hasher->CheckPassword($old_pass, $user->password)) {			// success
-
 				// Hash new password using phpass
 				$hashed_password = $hasher->HashPassword($new_pass);
-
 				// Replace old password with new one
 				$this->ci->users->change_password($user_id, $hashed_password);
 				return TRUE;
-
 			} else {															// fail
 				$this->error = array('old_password' => 'auth_incorrect_password');
 			}

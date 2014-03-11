@@ -123,15 +123,14 @@
                             
                             $login = array(
                                 'name'    => 'username',
-                                'id'    => 'username',
+                                'id'    => 'user',
                                 'value' => set_value('username'),
                                 'maxlength'    => 80,
                                 'size'    => 30,
-                                'id'=>'UserName',
                                 'required'=>'',
                                 'pattern'=>'[a-zA-Z0-9\_\.\@]{6,24}',
-                                'oninput'=>"check_valid_input(this,'username')",
-                                "oninvalid"=>"check_valid_input(this,'username')",
+                                'oninput'=>"check_valid_input('user','username')",
+                                "oninvalid"=>"check_valid_input('user','username')",
                                 'title'=>"Tên đăng nhập sử dụng chữ cái, chữ số, gạch dưới và dấu chấm. Chiều dài từ 6-24 ký tự",
                                 'style'=>"width: 220px; height: 25px; margin-left: 25px; padding-left: 5px; border: none;",
                                 "maxlength"=>32,
@@ -141,14 +140,13 @@
                             
                             $password = array(
                                 'name'    => 'pwd',
-                                'id'    => 'pwd',
+                                'id'    => 'pass',
                                 'value'=>set_value('pwd'),
                                 'size'    => 30,
-                                'id'=>'Password',
                                 'required'=>'',
                                 'pattern'=>'[a-zA-Z0-9\_\.\@]{6,24}',
-                                'oninput'=>"check_valid_input(this,'pass');",
-                                "oninvalid"=>"check_valid_input(this,'pass')",
+                                'oninput'=>"check_valid_input('pass','pass');",
+                                "oninvalid"=>"check_valid_input('pass','pass')",
                                 'style'=>"width: 220px; height: 25px; margin-left: 25px; padding-left: 5px; border: none;",
                                 "maxlength"=>32,
                                 'placeholder'=>'Tên đăng nhập',
@@ -162,7 +160,7 @@
                               <p align="center" style="font-weight: bold; margin: 0px 0px -15px 0px; color: #d60000;"><?php echo form_error($login['name']); ?><?php echo isset($errors[$login['name']])?$errors[$login['name']]:''; ?><?php echo form_error($password['name']); ?><?php echo isset($errors[$password['name']])?$errors[$password['name']]:''; ?></p>
                               <p align="center" style="font-weight: bold; margin: 0px 0px -15px 0px; color: #d60000;"></p>
                               <div id="content-login"><?php echo form_input($login); ?></div>
-                              <div id="content-login"><input required oninput="check_valid_input(this,'pass');" oninvalid="check_valid_input(this,'pass');" style='width: 220px; height: 25px; margin-left: 25px;padding-left: 5px; border: none;' name="pwd" id="pwd" value="" maxlength="32" class="keyboardInput" type="password" placeholder="Mật khẩu cấp 1"></div>
+                              <div id="content-login"><?php echo form_password($password); ?></div>
                               <input type="submit" name="btnLogin" id='btn-login'  value="Đăng nhập" style="margin-left: 115px;"/>
                               <p align="center" style="margin-top: 30px;"><a href="http://id.gamebank.vn/i/forgot">Quên thông tin tài khoản?</a> </p>
                               <p style="padding-top: 2px;" align="center"></p>

@@ -88,12 +88,26 @@ Tài khoản
     <table width="195px" height="70px" border="0">
       <tr>
         <td width="78">Tổng số tiền:</td>
-        <td width="80" align="right"><span style="color:#060;font-weight:bold">2.250</span></td>
+        <?php
+        if(!empty($blance_user))
+        {
+        ?>
+        <td width="80" align="right"><span style="color:#060;font-weight:bold"><?php echo number_format($blance_user[0]['blance'])?></span></td>
+        <?php } else {?>
+        <td width="80" align="right"><span style="color:#060;font-weight:bold">0</span></td>
+        <?php } ?>
         <td width="23" align="right">VNĐ</td>
       </tr>
       <tr>
         <td>Có thể sử dụng:</td>
-        <td align="right"><span style="color:#03C;font-weight:bold">2.250</span></td>
+        <?php
+        if(!empty($blance_user))
+        {
+        ?>
+        <td align="right"><span style="color:#03C;font-weight:bold"><?php echo number_format($blance_user[0]['blance'])?></span></td>
+        <?php } else {?>
+        <td align="right"><span style="color:#03C;font-weight:bold">0</span></td>
+        <?php } ?>
         <td align="right">VNĐ</td>
       </tr>
       
@@ -101,9 +115,9 @@ Tài khoản
     <div style="border-style:solid; border-color:#999; width:180px; border-width:1px; border-bottom:0;"></div>
 </div>
 <div class="text11tahoma" style="padding-top:7px;" align="left">
-<div class="litxtbtomlogin"><img src="<?php echo base_url();?>template/ezwebvietnam/home/images/li.gif" />&nbsp;&nbsp;<a href="http://id.gamebank.vn"><span id="changePass">Đổi mật khẩu</span></a></div>
+<div class="litxtbtomlogin"><img src="<?php echo base_url();?>template/ezwebvietnam/home/images/li.gif" />&nbsp;&nbsp;<a href="<?php echo base_url();?>thanh-vien/doi-mat-khau"><span id="changePass">Đổi mật khẩu</span></a></div>
 <div class="litxtbtomlogin"><img src="<?php echo base_url();?>template/ezwebvietnam/home/images/li.gif" />&nbsp;&nbsp;<a href="http://id.gamebank.vn"><span id="infoAcc">Thông tin tài khoản</span></a></div>
-<div class="litxtbtomlogin"><img src="<?php echo base_url();?>template/ezwebvietnam/home/images/li.gif" />&nbsp;&nbsp;<a href="logout.php"><span id="logout">Thoát</span></a></div>
+<div class="litxtbtomlogin"><img src="<?php echo base_url();?>template/ezwebvietnam/home/images/li.gif" />&nbsp;&nbsp;<a href="<?php echo base_url();?>logout"><span id="logout">Thoát</span></a></div>
 </div>
 </div>
 </div>

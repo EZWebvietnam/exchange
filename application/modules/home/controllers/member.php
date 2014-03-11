@@ -10,18 +10,18 @@
             $this->load->library('security');
             $this->load->library('tank_auth');
             $this->lang->load('tank_auth');
+            if(!$this->tank_auth->is_logged_in())
+            {
+                redirect('/');
+            }
+            parent::blance_of_user($this->session->userdata('user_id'));
         }
         public function index()
         {
-            if(!$this->tank_auth->is_logged_in())
-            {
-               redirect('/');
-            }
-            else
-            {
-                $account_blance = $this->userblancemodel->get_info($this->session->userdata('user_id'));
-                $this->load->view('home/layout_member');
-            }
+            //$account_blance = $this->userblancemodel->get_info($this->session->userdata('user_id'));
+            $this->load->view('home/layout_member',$this->data);
+
         }
+        
     }
 ?>

@@ -9,10 +9,11 @@ class MY_Controller extends CI_Controller
         $this->data = array();
 
     }
-    public function list_cate()
+    public function blance_of_user($id_user)
     {
-        $this->load->model('catemodel');
-        $this->data['list_cate']=$this->catemodel->load_cate();
+        $this->load->model('blance');
+        $data = $this->blance->get_blance_user($id_user);
+        $this->data['blance_user'] =  $data;
     }
 }
 ?>
