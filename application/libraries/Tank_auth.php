@@ -56,14 +56,16 @@ class Tank_auth
 				$get_user_func = 'get_user_by_email';
 			}
 
-			if (!is_null($user = $this->ci->users->$get_user_func($login))) {	// login ok
-
+			if (!is_null($user = $this->ci->users->$get_user_func($login))) {
+            	// login ok
+                        
 				// Does password match hash in database?
 				$hasher = new PasswordHash(
 						$this->ci->config->item('phpass_hash_strength', 'tank_auth'),
 						$this->ci->config->item('phpass_hash_portable', 'tank_auth'));
-				if ($hasher->CheckPassword($password, $user->password)) {		// password ok
-
+                       
+				if ($hasher->CheckPassword($password,$user->password)) {		// password ok
+                          
 					if ($user->banned == 1) {									// fail - banned
 						$this->error = array('banned' => $user->ban_reason);
 
@@ -187,7 +189,6 @@ class Tank_auth
 					$this->ci->config->item('phpass_hash_strength', 'tank_auth'),
 					$this->ci->config->item('phpass_hash_portable', 'tank_auth'));
 			$hashed_password = $hasher->HashPassword($password);
-
 			$data = array(
 				'username'	=> $username,
 				'password'	=> $hashed_password,

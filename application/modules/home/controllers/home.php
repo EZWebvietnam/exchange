@@ -85,7 +85,7 @@
                         $use_username ? $this->form_validation->set_value('username') : '',
                         $this->form_validation->set_value('sEmail'),
                         $this->form_validation->set_value('sPassWord1'),
-                        $email_activation,'2'))) {                                    // success
+                        $email_activation,'2',$account_number))) {                                    // success
 
                         $data['site_name'] = $this->config->item('website_name', 'tank_auth');
 
@@ -119,7 +119,6 @@
         {
             if ($this->tank_auth->is_logged_in()) {                                    // logged in
                 redirect('/');
-
             }
             else {
                 $this->data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') AND
@@ -127,7 +126,6 @@
                 $this->data['login_by_email'] = $this->config->item('login_by_email', 'tank_auth');
                 $this->form_validation->set_rules('login', 'Login', 'trim|required|xss_clean');
                 $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
-                $this->form_validation->set_rules('remember', 'Remember me', 'integer');
 
                 // Get login for counting attempts to login
                 if ($this->config->item('login_count_attempts', 'tank_auth') AND

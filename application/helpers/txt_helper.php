@@ -385,7 +385,7 @@
                 return $str;
             }
         }
-        if(function_exists('rand_account_number'))
+        if(!function_exists('rand_account_number'))
         {
             function rand_account_number($length)
             {
@@ -395,6 +395,7 @@
                 for( $i = 0; $i < $length; $i++ ) {
                     $str .= $chars[ rand( 0, $size - 1 ) ];
                 }
+                return $str;
             }
         }
         if(!function_exists('bd_nice_number'))

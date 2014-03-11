@@ -124,7 +124,7 @@
                               <input type="submit" name="btnLogin" id='btn-login'  value="Đăng nhập" style="margin-left: 115px;"/>
                               <p align="center" style="margin-top: 30px;"><a href="http://id.gamebank.vn/i/forgot">Quên thông tin tài khoản?</a> </p>
                               <p style="padding-top: 2px;" align="center"></p>
-                              <p style="font-weight: bold; font-size: 14px;" align="center">Bạn chưa có tài khoản? <a href="http://id.gamebank.vn/register">Đăng ký ngay</a></p>
+                              <p style="font-weight: bold; font-size: 14px;" align="center">Bạn chưa có tài khoản? <a href="<?php echo base_url();?>register">Đăng ký ngay</a></p>
                               <p style="font-size: 12px; padding: 30px 0px 20px 0px; text-align: center;"><em><span style="text-decoration: underline;">Chú ý:</span> Sử dụng mật khẩu cấp 1 để đăng nhập.</em></p>
                            </form>
                         </div>

@@ -13,8 +13,8 @@ Chào mừng bạn đã gia nhập <?php echo $site_name; ?>. We listed your sig
 <br />
 <big style="font: 16px/18px Arial, Helvetica, sans-serif;"><b><a href="<?php echo site_url('/active-user/'.$user_id.'/'.$new_email_key); ?>" style="color: #3366cc;">Finish your registration...</a></b></big><br />
 <br />
-Nếu click được, vui lòng coppy link dưới dây và chạy trên trình duyệt của bạn:<br />
-<nobr><a href="<?php echo site_url('/kich-hoat/'.$user_id.'/'.$new_email_key); ?>" style="color: #3366cc;"><?php echo site_url('/active-user/'.$user_id.'/'.$new_email_key); ?></a></nobr><br />
+Nếu không click được, vui lòng coppy link dưới dây và chạy trên trình duyệt của bạn:<br />
+<nobr><a href="<?php echo site_url('/active-user/'.$user_id.'/'.$new_email_key); ?>" style="color: #3366cc;"><?php echo site_url('/active-user/'.$user_id.'/'.$new_email_key); ?></a></nobr><br />
 <br />
 Vui lòng kích hoạt email trong vòng <?php echo $activation_period; ?> tiếng kể từ khi bạn nhận được email này.<br />
 <br />
