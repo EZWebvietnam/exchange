@@ -1,0 +1,811 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+
+
+body {
+
+	margin-left: 0px;
+
+	margin-top: 0px;
+
+	margin-right: 0px;
+
+	margin-bottom: 0px;
+
+	font-family: Tahoma;
+
+	font-size:12px;
+
+}
+
+#nav a:link, #nav a:active,
+
+#nav a:visited {
+
+    text-decoration: none;
+
+}
+
+a:link {
+
+	color: #000;
+
+	text-decoration:none;
+
+}
+
+a:visited {
+
+	color: #000;
+
+	text-decoration:none;
+
+}
+
+a:hover {
+
+	color: #F30;
+
+	text-decoration:underline;
+
+}
+
+a:active {
+
+	color: #F30;
+
+	text-decoration:none;
+
+}
+
+.menu{
+
+	width:100px;
+
+	height:29px;
+
+	float:left;	
+
+	font-size:18px;
+
+	color:#FFF;
+
+	text-align:center;
+
+	padding-top:11px;
+
+	border-right-width:1px;
+
+	border-right-color:#CCC;
+
+	border-right-style:solid;
+
+}
+
+.menuthis{
+
+	width:100px;
+
+	height:29px;
+
+	float:left;	
+
+	font-size:18px;
+
+	color:#FFF;
+
+	text-align:center;
+
+	padding-top:11px;
+
+	border-right-width:1px;
+
+	border-right-color:#CCC;
+
+	border-right-style:solid;
+
+}
+
+.submenu{
+
+	margin-right:1px;
+
+	padding-top:2px;
+
+	padding-right:5px;
+
+	padding-left:5px;
+
+	float:left;
+
+	height:16px;
+
+	color:#3968D7;
+
+}
+
+.bannerMain{
+
+	width:950px; 
+
+	height:100px;
+
+}
+
+.bannerSite{
+
+	height:100px;
+
+	width:950px; 
+
+}
+
+.logodiv{
+
+	width:250px; 
+
+	padding-top:15px; 
+
+	padding-left:10px;
+
+}
+
+.bgmenu{
+
+	height:40px; 
+
+	background-image:url(../images/bgmenu_blue.png);
+
+	}
+
+.menuContain{
+
+	width:950px; 
+
+	height:40px;
+
+	}
+
+.homeIcon{
+
+	background-image:url(../images/bg.png);
+
+	background-position:0px -227px; 
+
+	width:50px; 
+
+	height:50px; 
+
+	position:relative; 
+
+	top:-12px; 
+
+	float:left;
+
+	}
+
+.textformTop{
+
+	padding-top:7px; 
+
+	padding-left:20px;	 
+
+	font-size:18px; 
+
+	color:#06C; 
+
+	font-weight:500; 
+
+	float:left;
+
+}
+
+.phoneicon{
+
+	width:18px;
+
+	height:15px;
+
+	float:left;
+
+	margin-left:28px;
+
+	margin-top:1px;
+
+	background-image:url(../images/bg.png);
+
+	background-position:-25px -175px;
+
+}
+
+.phoneNumber{
+
+	width:85px;
+
+	float:right;
+
+	font:Tahoma;
+
+	margin:1px 5px 0px 2px;
+
+	font-size:11px;
+
+	color:#F00;
+
+	font-weight:bold;
+
+}
+
+.homeMini{
+
+	width:12px;
+
+	margin-top:1px;
+
+	height:12px; 
+
+	background-image:url(../images/bg.png);
+
+	background-position:-29px -195px;
+
+	float:left;
+
+}
+
+.mobiIcon{
+
+	margin-left:20px;
+
+	width:12px;
+
+	height:12px;
+
+	background-image:url(../images/bg.png);
+
+	background-position:-29px -211px;
+
+	float:left
+
+}
+
+.litxtbtomlogin{
+
+	padding-top:3px; 
+
+	padding-left:20px;
+
+	}
+
+.text11tahoma{
+
+	 
+
+	font-size:11px;
+
+}
+
+.text12grey{
+
+	 
+
+	font-size:12px; 
+
+	color:#666; 
+
+	}
+
+.stephide{
+
+	width:100px; 
+
+	height:22px; 
+
+	background-image:url(../images/bg.png);
+
+	background-position:0px -120px;	 
+
+	font-size:13px; 
+
+	font-weight:bold; 
+
+	color:#FFF;
+
+}
+
+.stepshow{
+
+	width:100px; 
+
+	height:22px; 
+
+	background-image:url(../images/bg.png);
+
+	background-position:0px -93px;
+
+	 
+
+	font-size:13px; 
+
+	font-weight:bold; 
+
+	color:#FFF;
+
+}
+
+.stephover{
+
+	width:100px; 
+
+	height:22px; 
+
+	background-image:url(../images/bg.png);
+
+	background-position:0px -147px;
+
+	 
+
+	font-size:13px; 
+
+	font-weight:bold; 
+
+	color:#FFF;
+
+}
+
+.titleFrm{
+
+	font-size:13px;
+
+	font-weight:bold; 
+
+	color:#06C; 
+
+	margin-left:10px; 
+
+	margin-top:10px;
+
+}
+
+.txtfieldblue{
+
+	border-style:solid; 
+
+	border-width:1px; 
+
+	border-color:#06C;
+
+}
+
+.divhr{
+
+	border-style:solid; 
+
+	border-color:#999; 
+
+	border-width:1px; 
+
+	border-bottom:0;
+
+}
+
+.loading{
+
+	visibility:hidden; 
+
+	border-color:#066; 
+
+	position:relative;
+
+	width:15px; 
+
+	height:15px;
+
+}
+
+.sticktitle{
+
+	width:16px; 
+
+	height:16px; 
+
+	background-image:url(../images/bg.png); 
+
+	background-position:0px -173px; 
+
+	float:left; 
+
+	margin-right:10px;
+
+}
+
+.sticktitleBig{
+
+	width:25px; 
+
+	height:25px; 
+
+	background-image:url(../images/bg.png); 
+
+	background-position:-126px -129px;
+
+	float:left; 
+
+	margin-right:10px;
+
+}
+
+.stickmethodBig{
+
+	width:25px; 
+
+	height:25px; 
+
+	background-image:url(../images/bg.png); 
+
+	background-position:-124px -95px;  
+
+	float:left;
+
+	margin-right:10px;
+
+}
+
+.nextIcon{
+
+	width:22px; 
+
+	height:27px;
+
+	background-image:url(../images/bg.png); 
+
+	background-position:0px -195px;	
+
+}
+
+.show_box{
+
+	border-width:0;height:160px;width:132px;
+
+	background-image:url(../images/moduleboxblue.png);
+
+}
+
+.dis_box{
+
+	border-width:0;height:160px;width:132px;
+
+	background-image:url(../images/moduleboxgrey.png);
+
+}
+
+.show_text{
+
+	text-align:center; 
+
+	padding-top:7px;
+
+	font-size:13px; 
+
+	color:#FFF; 
+
+	text-decoration:none;
+
+}
+
+.imgbox{
+
+	padding-top:4px;
+
+	padding-left:3px;
+
+}
+
+.titleSLbox{
+
+	height:25px;
+
+	font-size:16px; 
+
+	font-family:Arial;
+
+	font-weight:600;
+
+	margin-left:10px; 
+
+	margin-top:10px;
+
+	color:#06C;
+
+}
+
+.loginformContain{
+
+	width:213px; 
+
+	height:auto;
+	
+	padding-bottom:10px;
+
+	border-width:1px; 
+
+	border-style:solid;
+
+	border-color:#999; 
+
+	background-color:#F8F8F8;
+
+}
+
+.divIcon{
+
+	width:16px;
+
+	height:16px;
+
+	float:left;
+
+}
+
+
+
+/* ICON CLASS DOM */
+
+.addMoneyIcon{
+
+	background-image:url(../images/bg.png);
+
+	background-position:-64px -173px;
+
+}
+
+.debitMoneyIcon{
+
+	background-image:url(../images/bg.png);
+
+	background-position:-64px -194px;
+
+}
+
+.sendMoneyIcon{
+
+	background-image:url(../images/bg.png);
+
+	background-position:-64px -218px;
+
+}
+
+.finishIcon{
+
+	background-image:url(../images/bg.png);
+
+	background-position:-90px -194px;
+
+}
+
+.approvedIcon{
+
+	background-image:url(../images/bg.png);
+
+	background-position:-64px -261px;
+
+}
+
+.pendingIcon{
+
+	background-image:url(../images/bg.png);
+
+	background-position:-64px -241px;
+
+}
+
+.cancelIcon{
+
+	background-image:url(../images/bg.png);
+
+	background-position:-90px -173px;
+
+}
+
+.hisPage{
+
+	background-color:#F60; 
+
+	border:#F60; 
+
+	width:15px; 
+
+	height:15px; 
+
+	float:left; 
+
+	margin:1px; 
+
+	color:#FFF;
+
+}
+
+.hisPageNow{
+
+	background-color:#06C; 
+
+	border:#F60; 
+
+	width:15px; 
+
+	height:15px; 
+
+	float:left; 
+
+	margin:1px; 
+
+	color:#FFF;
+
+}
+
+
+
+/* CSS ID DOM */
+
+#boxContent{
+
+	background-image:url(../images/bg.png);
+
+	background-position:0px 0px;
+
+	width:720px; 
+
+	height:35px;
+
+}
+
+#bannerContact{
+
+	padding-top:3px;
+
+	width:355px; 
+
+	float:right; 
+
+	font-family:Arial; 
+
+	font-size:13px;
+
+	color:#333;
+
+}
+
+#loginformTop{
+
+	/*background-image:url(../images/loginformtop.png);*/
+
+	background-image:url(./images/bg.png);
+
+	background-position:0px -48px;
+
+	width:215px; 
+
+	height:35px; 
+
+	border-width:0px;
+
+}
+
+#pageContent{
+
+	 
+
+	font-size:11px; 
+
+	padding-top:7px;
+
+}
+
+#logedShowname{
+
+	 
+
+	font-size:13px;
+
+	padding-top:10px; 
+
+	color:#03C;
+
+	font-weight:bold;
+
+	text-align:center;
+
+	}
+
+#ContentContainer{
+
+	width:718px; 
+
+	height:auto;
+
+	border-width:1px; 
+
+	border-style:solid; 
+
+	border-color:#999; 
+
+	background-color:#F8F8F8;
+
+}
+
+#GuideContainer{
+
+	width:710px; 
+
+	height:180px; 
+
+	border-width:0px; 
+
+	background-color:#FFF; 
+
+	margin:4px;
+
+}
+
+#ActionContainer{
+
+	width:710px; 
+
+	height:300px; 
+
+	border-width:0px; 
+
+	margin:4px;
+
+	}
+
+#SubmitFormContainer{
+
+	width:350px; 
+
+	height:300px; 
+
+	border-width:0px; 
+
+	float:left;
+
+}
+
+#infoBankContainer{
+
+	width:350px; 
+
+	height:300px;
+
+	border-width:0px; 
+
+	float:right;
+
+}
+
+#relaLink{
+
+	float:right;
+
+	font-size:12px; 
+
+	color:#999; 
+
+	margin-top:12px; 
+
+	padding-right:20px;
+
+}
+
+#yahooOnline{
+
+	background-image:url(../images/bg.png);
+
+	background-position:-222px -50px;
+
+	width:205px; 
+
+	height:22px
+
+}

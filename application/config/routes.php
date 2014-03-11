@@ -42,6 +42,7 @@ $route['default_controller'] = "home/index";
 $route['trang-chu'] = "home/home/index";
 $route['register'] = "home/home/register";
 $route['active-user/(:any)'] = "home/home/activate";
+$route['thanh-vien'] = "home/member/index";
 $route['404_override'] = '';
 $route['admin'] = "admin/index/login";
 $route['admin/login'] = "admin/index/login";

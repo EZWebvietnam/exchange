@@ -18,7 +18,7 @@
          </div>
          <!--end #-->
          <div id="banner">
-            <a href='http://id.gamebank.vn/policy' target='_new'><img src="http://id.gamebank.vn/libs/images/banner.png" title=""></a>
+            <a href='http://id.gamebank.vn/policy' target='_new'><img src="<?php echo base_url();?>template/ezwebvietnam/home/libs/images/banner.png" title=""></a>
          </div>
       </div>
       <div id="menu">
@@ -97,7 +97,7 @@
             </li>
          </ul>
          <div id="language-list">
-            <img class="active" src="http://id.gamebank.vn/libs/images/vi.png" onclick="window.location.replace(window.location.pathname+'?l=vi');"/>&nbsp;&nbsp;
+            <img class="active" src="<?php echo base_url();?>template/ezwebvietnam/home/libs/images/vi.png" onclick="window.location.replace(window.location.pathname+'?l=vi');"/>&nbsp;&nbsp;
          </div>
       </div>
       <div id="wrapper">
