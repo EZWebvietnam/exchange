@@ -49,35 +49,12 @@ $(document).ready(function() {
 
     <li><a href="http://pay.gamebank.vn/"><div class="menu" style="width: 100px">Nạp tiền</div></a>
       <ul class='MenuDropDown'>
-          <li><a href="http://pay.gamebank.vn">&nbsp;Nạp tiền</a></li>
-        <li><a href="http://pay.gamebank.vn/?mod=wdr">&nbsp;Rút tiền</a></li>
+          <li><a href="<?php echo base_url();?>thanh-vien/card">&nbsp;Nạp tiền</a></li>
         <li><a href="#">&nbsp;Chuyển tiền</a></li>
       </ul>
     </li>
 
-    <li><a href="http://card.gamebank.vn/"><div class="menu" style="width: 100px">Mua thẻ</div></a>
-      <ul class='MenuDropDown'>
-          <li><a href="http://card.gamebank.vn/?mod=zxu">&nbsp;Nạp Zing Xu</a></li>
-        <li><a href="http://card.gamebank.vn/?mod=bbac">&nbsp;Nạp Bạc Gate FPT</a></li>
-        <li><a href="http://card.gamebank.vn/?mod=cad">&nbsp;Mã thẻ cào</a></li>
-        <li><a href="http://card.gamebank.vn/?mod=mob">&nbsp;Topup điện thoại</a></li>
-      </ul>
-    </li>
-
-    <li><a href="http://key.gamebank.vn"><div class="menu" style="width:100px;">Key Game</div></a></li>
-
-    <li><a href="http://san.gamebank.vn/"><div class="menu" style="width: 130px">Sàn giao dịch</div></a></li>
-    <li><a href="http://diendan.gamebank.vn/"><div class="menu" style="width: 100px">Diễn Đàn</div></a></li>
-
-    <li><a href="http://his.gamebank.vn/"><div class="menu" style="width: 100px">Lịch sử</div></a>
-      <ul style="visibility: hidden; display: block; ">
-          <li><a href="http://his.gamebank.vn">&nbsp;Lịch sử</a></li>
-        <li><a href="http://his.gamebank.vn?mod=tctt">&nbsp;Tra cứu thẻ nạp</a></li>
-        <li><a href="http://his.gamebank.vn?mod=tcsl">&nbsp;Tra cứu sản lượng</a></li>
-      </ul>
-    </li>
-
-    <li class="first"><a href="http://id.gamebank.vn/"><div class="menu" style="width: 100px">Tài khoản</div></a></li>
+    
 </ul>
 
           <div id="language-list">

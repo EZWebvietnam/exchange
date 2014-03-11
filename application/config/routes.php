@@ -45,6 +45,7 @@ $route['active-user/(:any)'] = "home/home/activate";
 $route['logout'] = "home/home/logout";
 $route['thanh-vien'] = "home/member/index";
 $route['thanh-vien/doi-mat-khau'] = "home/home/change_pass";
+$route['thanh-vien/card'] = "home/member/card";
 $route['404_override'] = '';
 $route['admin'] = "admin/index/login";
 $route['admin/login'] = "admin/index/login";

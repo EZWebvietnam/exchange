@@ -228,11 +228,13 @@
                            $this->data['errors']['captcha'] = 'Wrong captcha code';
                     }
                 }
+                $this->data['main_content']='change_pass_view';
                 $this->data['image'] = $this->_create_captcha();
                 $this->load->view('home/layout_changepass', $this->data);
             }
             else
             {
+                 $this->data['main_content']='change_pass_view';
                 $this->data['image'] = $this->_create_captcha();
                 $this->load->view('home/layout_changepass', $this->data);
             }

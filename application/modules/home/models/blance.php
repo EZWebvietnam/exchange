@@ -13,6 +13,12 @@
           $this->db->where('id_user',$id_user);
           $query = $this->db->get('user_blance');
           return $query->result_array();
+      }
+      public function update_blance($id_user,array $data)
+      {
+           $id_user = intval($id_user);
+           $this->db->where('id_user',$id_user);
+           $this->db->update('user_blance',$data);
       }                          
   }
 ?>
