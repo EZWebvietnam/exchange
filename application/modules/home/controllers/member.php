@@ -30,29 +30,29 @@
                 $this->form_validation->set_rules('sVerifyCode','sVerifyCode','trim|xss_clean|callback_check_captcha[sVerifyCode]');
                 if($this->form_validation->run())
                 {
-                        $this->load->model('card');
-                        $this->load->model('blance');
-                        $card_detail = $this->card->check_card($this->form_validation->set_value('card'));
-                        if(empty($card_detail))
-                        {
-                            redirect('/thanh-vien/card');
-                        }
-                        else
-                        {
-                              $price = $card_detail[0]['price'];
-                              $money  = $price + $this->data['blance_user'][0]['blance'];
-                              $data_blance = array('blance'=>$money);
-                              $this->blance->update_blance($this->session->userdata('user_id'),$data_blance);
-                              $data_card_log = array('id_user'=>$this->session->userdata('user_id'),'id_card'=>$card_detail[0]['id'],'create_date'=>strtotime('now'));
-                              $this->card->insert_log($data_card_log);
-                              $card_data = array('status'=>1);
-                              $this->card->update_card($card_detail[0]['id'],$card_data);
-                              redirect('/thanh-vien');
-                        }
+                    $this->load->model('card');
+                    $this->load->model('blance');
+                    $card_detail = $this->card->check_card($this->form_validation->set_value('card'));
+                    if(empty($card_detail))
+                    {
+                        redirect('/thanh-vien/card');
+                    }
+                    else
+                    {
+                        $price = $card_detail[0]['price'];
+                        $money  = $price + $this->data['blance_user'][0]['blance'];
+                        $data_blance = array('blance'=>$money);
+                        $this->blance->update_blance($this->session->userdata('user_id'),$data_blance);
+                        $data_card_log = array('id_user'=>$this->session->userdata('user_id'),'id_card'=>$card_detail[0]['id'],'create_date'=>strtotime('now'));
+                        $this->card->insert_log($data_card_log);
+                        $card_data = array('status'=>1);
+                        $this->card->update_card($card_detail[0]['id'],$card_data);
+                        redirect('/thanh-vien');
+                    }
                 }
                 else
                 {
-                    
+
                     $this->data['main_content']='card_view';
                     $this->data['image'] = $this->_create_captcha();
                     $this->load->view('home/layout_changepass', $this->data);
@@ -99,6 +99,57 @@
             {
                 $this->form_validation->set_message('check_captcha', 'Wrong captcha code');
                 return FALSE;
+            }
+        }
+        public function transfer_money()
+        {
+            if($this->input->post())
+            {
+                $this->form_validation->set_rules('account_number','Card','trim|xss_clean|callback_check_account[account_number]');
+                $this->form_validation->set_rules('money','Card','trim|xss_clean|callback_check_money[money]');
+                if($this->form_validation->run())
+                {
+
+                }
+                else
+                {
+                    $this->data['main_content'] = 'chuyen_tien_view';
+                    $this->load->view('home/layout_changepass',$this->data);
+                }
+            }
+            else
+            {
+                $this->data['main_content'] = 'chuyen_tien_view';
+                $this->load->view('home/layout_changepass',$this->data);
+            }
+        }
+        public function check_account($account_number)
+        {
+            $this->load->model('users');
+            $account_detail = $this->users->get_user_by_account_number($account_number);
+            if(empty($account_detail))
+            {
+                $this->form_validation->set_message('check_account', 'Account not exists');
+                return FALSE;
+            }
+            else
+            {
+                return $account_detail[0]['account_number'];
+            }
+        }
+        public function check_money($money)
+        {
+            $this->load->model('blance');
+            $detail = $this->blance->get_blance_user($this->session->userdata('user_id'));
+            if(empty($detail) || $detail[0]['blance'] < $money)
+            {
+                $this->form_validation->set_message('check_money', 'Money not enough');
+                RETURN FALSE;
+            }
+            else
+            {
+               
+                return TRUE;
             }
         }
     }

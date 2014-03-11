@@ -19,6 +19,10 @@
            $id_user = intval($id_user);
            $this->db->where('id_user',$id_user);
            $this->db->update('user_blance',$data);
+      }
+      public function insert_trans_log(array $data)
+      {
+          $this->db->insert('transfer_log',$data);
       }                          
   }
 ?>
