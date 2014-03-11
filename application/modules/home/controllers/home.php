@@ -109,9 +109,7 @@
                     }
                 }
 
-                $this->data['main_content'] = 'auth/register_form_1';
                 $this->data['use_username'] = $use_username;
-
                 $this->load->view('home/layout_register', $this->data);
             }
         }
