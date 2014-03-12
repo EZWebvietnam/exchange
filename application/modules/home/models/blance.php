@@ -22,7 +22,12 @@
       }
       public function insert_trans_log(array $data)
       {
-          $this->db->insert('transfer_log',$data);
-      }                          
+          $this->db->insert('trans_log',$data);
+          return $this->db->insert_id();
+      }
+      public function get_transaction_log($transaction_log)
+      {
+          $sql="SELECT * FROM trans_log INNER JOIN users ON users.account_number = trans_log.account_id";
+      }
   }
 ?>
