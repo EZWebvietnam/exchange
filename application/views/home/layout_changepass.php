@@ -42,18 +42,18 @@
             <div class="home-icon"></div>
             <ul id="nav">
                 <li>
-                    <a href="http://gamebank.vn/">
+                    <a href="<?php echo base_url();?>">
                         <div class="menu" style="width: 100px">Trang Chủ</div>
                     </a>
                 </li>
                 <li>
-                    <a href="http://pay.gamebank.vn/">
+                    <a href="<?php echo base_url();?>thanh-vien/card">
                         <div class="menu" style="width: 100px">Nạp tiền</div>
                     </a>
                     <ul class='MenuDropDown'>
                         <li><a href="<?php echo base_url();?>thanh-vien/card">&nbsp;Nạp tiền</a></li>
                         
-                        <li><a href="#">&nbsp;Chuyển tiền</a></li>
+                        <li><a href="<?php echo base_url();?>thanh-vien/chuyen-tien">&nbsp;Chuyển tiền</a></li>
                     </ul>
                 </li>
                 

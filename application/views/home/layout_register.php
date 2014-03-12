@@ -45,17 +45,23 @@ $(document).ready(function() {
 
 <div class="home-icon"></div>
 <ul id="nav">
-  <li><a href="http://gamebank.vn/"><div class="menu" style="width: 100px">Trang Chủ</div></a></li>
-
-    <li><a href="http://pay.gamebank.vn/"><div class="menu" style="width: 100px">Nạp tiền</div></a>
-      <ul class='MenuDropDown'>
-          <li><a href="<?php echo base_url();?>thanh-vien/card">&nbsp;Nạp tiền</a></li>
-        <li><a href="#">&nbsp;Chuyển tiền</a></li>
-      </ul>
-    </li>
-
-    
-</ul>
+                <li>
+                    <a href="<?php echo base_url();?>">
+                        <div class="menu" style="width: 100px">Trang Chủ</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url();?>thanh-vien/card">
+                        <div class="menu" style="width: 100px">Nạp tiền</div>
+                    </a>
+                    <ul class='MenuDropDown'>
+                        <li><a href="<?php echo base_url();?>thanh-vien/card">&nbsp;Nạp tiền</a></li>
+                        
+                        <li><a href="<?php echo base_url();?>thanh-vien/chuyen-tien">&nbsp;Chuyển tiền</a></li>
+                    </ul>
+                </li>
+                
+            </ul>
 
           <div id="language-list">
               <img class="active" src="<?php echo base_url();?>template/ezwebvietnam/home/libs/images/vi.png" onclick="window.location.replace(window.location.pathname+'?l=vi');"/>&nbsp;&nbsp;

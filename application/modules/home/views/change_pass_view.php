@@ -1,5 +1,5 @@
 <div class="block">
-<div class="breadcumb"><a href="http://id.gamebank.vn">Gamebank id</a> &gt; <a href="http://id.gamebank.vn">Quản lý tài khoản</a> &gt; <span>Bổ sung thông tin cá nhân</span></div>
+<div class="breadcumb"><a href="<?php echo base_url();?>thanh-vien">BEST RESELLER ID</a> &gt; <a href="<?php echo base_url();?>thanh-vien">Quản lý tài khoản</a> &gt; <span>Đổi mật khẩu</span></div>
 <div class="title-block">
     <div class="title-block-left">
         <h2>Đổi mật khẩu cấp 1</h2>
@@ -90,7 +90,7 @@
                 <?php }?>
             <div class="clear"></div>
             <div class="div-label">&nbsp;</div>
-            <div class="div-content div-submit"><input value="Đồng ý" name="btnchangpass1" class="submit-input"  type="submit"><input class="submit-input" value="Hủy Bỏ" onclick="window.location='http://id.gamebank.vn/profile'"  type="button"></div>
+            <div class="div-content div-submit"><input value="Đồng ý" name="btnchangpass1" class="submit-input"  type="submit"><input class="submit-input" value="Hủy Bỏ" onclick="window.location='<?php echo base_url();?>thanh-vien'"  type="button"></div>
             <div class="clear"></div>
         </div>
         <div style="display: none;"><input type='text' name="code_security" id="code_security" value="" /></div>
