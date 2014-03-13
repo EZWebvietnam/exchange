@@ -93,9 +93,9 @@
             <div class="box_menu_right">
                 <ul>
                                         <li class="main">
-                        <a href="<?php echo base_url();?>ctv/productctv/ajax_get_product" rel="khachhang" class="v_link">
-                            <div><img src="http://quanlybanhang.360vnit.com/icon/customers.png" alt=""></div>
-                            Khóa học
+                        <a href="<?php echo base_url();?>ctv/systemctv/ajax_get_product" rel="khachhang" class="v_link">
+                            <div><img src="<?php echo base_url();?>template/ezwebvietnam/admin_cp/images/icon/customers.png" alt=""></div>
+                            Thành viên
                         </a>
                     </li>  
                                                             <li class="main">

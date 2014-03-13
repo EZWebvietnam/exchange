@@ -28,7 +28,7 @@
             <table style="width: 100%;">
                <tr>
                   <td>
-                     <div class="h-title">Danh sách khóa học</div>
+                     <div class="h-title">User Management</div>
                   </td>
                   <td style="float: right;">
                      <div class="addlink"><a href="<?php echo base_url(); ?>ctv/productctv/add_product" class="add grouped_elements"><span>Thêm mới</span></a></div>
@@ -38,9 +38,9 @@
             <div class="box-content">
                <div class="box_find">
                </div>
-               <form action="<?php echo base_url();?>ctv/productctv/deletes" method="post" accept-charset="utf-8" id="admindata_kh">
+               <form action="<?php echo base_url();?>ctv/systemctv/deletes" method="post" accept-charset="utf-8" id="admindata_kh">
                   <input type="hidden" id="page" value="0"/>
-                  <input type="hidden" id="callback" value="<?php echo base_url();?>ctv/productctv/ajax_get_product"/>
+                  <input type="hidden" id="callback" value="<?php echo base_url();?>ctv/systemctv/ajax_get_product"/>
                   <table class="admindata">
                      <thead>
                         <tr>
@@ -84,11 +84,9 @@
                         </tr>
                         <tr>
                            <th class="checkbox"><input type="checkbox" name="sa" id="sa" onclick="check_chose('sa', 'ar_id[]', 'admindata_kh')"></th>
-                           <th class="id">Tên khóa học</th>
-                           <th>Giới thiệu</th>
-                           <th>Ngày hết hạn</th>
-                           <th>Link</th>
-                           <th>Giá</th>
+                           <th class="id">Username</th>
+                           <th>Email</th>
+                           <th>Create Date</th>
                            <th class="publish">Chức năng</th>
                         </tr>
                      </thead>
@@ -97,14 +95,12 @@
                         {
                         ?>
                      <tr class="row1 ">
-                        <td align="center"><input  type="checkbox" name="ar_id[]" value="<?php echo $product_ref['user_product_id']?>"></td>
-                        <td><?php echo $product_ref['title']?></td>
-                        <td><?php echo $product_ref['description']?></td>
-                        <td><?php echo $product_ref['exp_date']?></td>
-                        <td><a href="<?php echo base_url();?>p_c-<?php echo $product_ref['id_cate']?>-<?php echo mb_strtolower(url_title(removesign($product_ref['name'])))?>/p_p-<?php echo $product_ref['id_product']?>-<?php echo mb_strtolower(url_title(removesign($product_ref['title'])))?>/ref/<?php echo $this->session->userdata('user_id') ?>">Link Marketing</a></a></td>
-                        <td><?php echo $product_ref['cost']?></td>
+                        <td align="center"><input  type="checkbox" name="ar_id[]" value="<?php echo $product_ref['id']?>"></td>
+                        <td><?php echo $product_ref['username']?></td>
+                        <td><?php echo $product_ref['email']?></td>
+                        <td><?php echo date('d/m/Y h:i:s',strtotime($product_ref['created']));?></td>
                         <td align="center">
-                           <a class="delete_record" href="<?php echo base_url();?>ctv/productctv/delete/<?php echo $product_ref['user_product_id']?>" title="Xóa"><img src="http://quanlybanhang.360vnit.com/app/templates/icon/del.png"></a>        
+                           <a class="delete_record" href="<?php echo base_url();?>ctv/systemctv/delete/<?php echo $product_ref['id']?>" title="Xóa"><img src="http://quanlybanhang.360vnit.com/app/templates/icon/del.png"></a>        
                         </td>
                      </tr>
                      <?php }?>       
@@ -155,7 +151,7 @@
                <script type="text/javascript">
                   function khachhang(page_no){  
                       load_show();   
-                      $.post("<?php echo base_url();?>ctv/productctv/ajax_get_product",{'page_no':page_no},function(data){
+                      $.post("<?php echo base_url();?>ctv/systemctv/ajax_get_product",{'page_no':page_no},function(data){
                           $("#result").html(data);                                            
                           load_hide();
                       });

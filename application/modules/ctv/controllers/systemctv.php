@@ -1,11 +1,11 @@
 <?php 
-class Productctv extends MY_Controller
+class Systemctv extends MY_Controller
 {  
     public function __construct()
     {
         parent::__construct();
         $this->load->library('session');
-        $this->load->model('productctvmodel');
+        $this->load->model('usermodel');
         $this->load->library('tank_auth');
         $this->lang->load('tank_auth');
     }
@@ -13,7 +13,7 @@ class Productctv extends MY_Controller
     {
         if (!$this->tank_auth->is_logged_in())
         {
-            redirect('/cong-tac-vien/login');
+            redirect('/quan-tri/login');
         }
         else
         {
@@ -22,7 +22,6 @@ class Productctv extends MY_Controller
     }
     public function ajax_get_product()
     {
-        $id_user = $this->session->userdata('user_id');
         $this->load->helper('url');
         $config['uri_segment'] = 5;
         if($this->input->post('page_no'))
@@ -34,7 +33,7 @@ class Productctv extends MY_Controller
             $page = 1;
         }
         $config['per_page'] = 10;
-        $config['total_rows'] = $this->productctvmodel->count_list_product($id_user);
+        $config['total_rows'] = $this->usermodel->count_user();
         if ($page == '') {
             $page = 1;
         }
@@ -44,7 +43,7 @@ class Productctv extends MY_Controller
             exit;
         }
        $num_pages = ceil($config['total_rows']/ $config['per_page']);
-       $array_sv = $this->productctvmodel->list_product($id_user,$config['per_page'], $page1);
+       $array_sv = $this->usermodel->load_user($config['per_page'], $page1);
        $this->data['total_page'] = $num_pages;
        $this->data['offset'] = $page1;
        $this->data['page']=$page;
@@ -54,7 +53,7 @@ class Productctv extends MY_Controller
     }
     public function delete($id)
     {
-        $this->productctvmodel->delete($id);
+        $this->usermodel->delete($id);
         $array = array('error'=>0,'msg'=>"Xóa thành công");
         echo json_encode($array);
     }
@@ -64,7 +63,7 @@ class Productctv extends MY_Controller
         $array = $this->input->post('ar_id');
         foreach($array as $k=>$v)
         {
-            $this->productctvmodel->delete($v);
+            $this->usermodel->delete($v);
         }
        $array = array('error'=>0,'msg'=>"Xóa thành công");
         echo json_encode($array);

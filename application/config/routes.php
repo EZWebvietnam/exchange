@@ -49,9 +49,10 @@ $route['thanh-vien/card'] = "home/member/card";
 $route['thanh-vien/chuyen-tien'] = "home/member/transfer_money";
 $route['thanh-vien/chuyen-tien/login/(:any)'] = "home/member/confirm_transfer";
 $route['thanh-vien/chuyen-tien/cofirm/(:any)'] = "home/member/confirm_trans";
+$route['quan-tri'] = "ctv/systemctv/index";
+$route['quan-tri/login'] = "ctv/homectv/login";
 $route['404_override'] = '';
-$route['admin'] = "admin/index/login";
-$route['admin/login'] = "admin/index/login";
+
 
 
 /* End of file routes.php */

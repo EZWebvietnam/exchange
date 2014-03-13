@@ -13,7 +13,7 @@ class Homectv extends MY_Controller
     {
         if ($this->tank_auth->is_login_admin(TRUE)) {						// logged in, not activated
 
-			redirect('/cong-tac-vien');
+			redirect('/quan-tri');
 
 		} else {
 
@@ -45,7 +45,7 @@ class Homectv extends MY_Controller
 
 						$data['login_by_email'])) {								// success
 
-                                                redirect('/cong-tac-vien');
+                                                redirect('/quan-tri');
 
 
 

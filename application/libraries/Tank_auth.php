@@ -147,6 +147,7 @@ class Tank_auth {
     }
 
     function is_login_admin($activated = TRUE) {
+        
         $array = $this->ci->users->get_user_role();
         if (in_array($this->ci->session->userdata('role'), $array)) {
             return $this->ci->session->userdata('status') === ($activated ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED);
