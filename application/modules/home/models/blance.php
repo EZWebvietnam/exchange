@@ -42,5 +42,57 @@
           $this->db->where('id',$id);
           $this->db->update('trans_log',$data);
       }
+      public function load_transaction_history($id_user,$number,$offset)
+      {
+          $id_user = intval($id_user);
+          $number = intval($number);
+          $offset = intval($offset);
+          $sql="SELECT * FROM trans_log INNER JOIN users ON users.account_number = trans_log.account_id WHERE trans_log.id_user = $id_user LIMIT $offset,$number";
+          $query = $this->db->query($sql);
+          return $query->result_array();
+      }
+      public function count_transaction_history($id_user)
+      {
+          $id_user = intval($id_user);
+          $sql="SELECT * FROM trans_log INNER JOIN users ON users.account_number = trans_log.account_id WHERE trans_log.id_user = $id_user";
+          $query = $this->db->query($sql);
+          return count($query->result_array());
+      }
+      public function load_card_history($id_user,$number,$offset)
+      {
+          $id_user = intval($id_user);
+          $number = intval($number);
+          $offset = intval($offset);
+          $sql="SELECT * FROM card_log INNER JOIN card ON card.id = card_log.id_card WHERE card_log.id_user = $id_user LIMIT $offset,$number";
+          $query = $this->db->query($sql);
+          return $query->result_array();
+      }
+      public function count_card_history($id_user)
+      {
+          $id_user = intval($id_user);
+          $sql="SELECT * FROM card_log INNER JOIN card ON card.id = card_log.id_card  WHERE card_log.id_user = $id_user";
+          $query = $this->db->query($sql);
+          return count($query->result_array());
+      }
+      public function load_transfer_system($id_user,$number,$offset)
+      {
+          $id_user = intval($id_user);
+          $number = intval($number);
+          $offset = intval($offset);
+          $sql="SELECT * FROM log_system WHERE log_system.id_user = $id_user LIMIT $offset,$number";
+          $query = $this->db->query($sql);
+          return $query->result_array();
+      }
+      public function count_transfer_system($id_user)
+      {
+          $id_user = intval($id_user);
+          $sql="SELECT * FROM log_system  WHERE log_system.id_user = $id_user";
+          $query = $this->db->query($sql);
+          return count($query->result_array());
+      }
+      public function insert_log_system(array $data)
+      {
+          $this->db->insert('log_system',$data);
+      }
   }
 ?>

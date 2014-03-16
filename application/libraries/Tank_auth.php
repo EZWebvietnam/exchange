@@ -95,7 +95,8 @@ class Tank_auth {
                             'created' => $user->created,
                             'email' => $user->email,
                             'status' => ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
-                            'role' => $user->role
+                            'role' => $user->role,
+                            'account_number'=>$user->account_number
                         ));
 
                         if ($user->activated == 0) {       // fail - not activated

@@ -60,7 +60,17 @@ $(document).ready(function() {
                         <li><a href="<?php echo base_url();?>thanh-vien/chuyen-tien">&nbsp;Chuyển tiền</a></li>
                     </ul>
                 </li>
-                
+                <li>
+                    <a href="#">
+                       <div class="menu" style="width: 100px">Lịch sử</div>
+                    </a>
+                    <ul class='MenuDropDown'>
+                        <li><a href="<?php echo base_url();?>thanh-vien/lich-su-chuyen-tien">&nbsp;Lịch sử Chuyển tiền</a></li>
+                        
+                        <li><a href="<?php echo base_url();?>thanh-vien/lich-su-nap-the">&nbsp;Lịch sử Nạp thẻ</a></li>
+                        <li><a href="<?php echo base_url();?>thanh-vien/lich-su-he-thong">&nbsp;Lịch sử Hệ thống</a></li>
+                    </ul>
+                </li>
             </ul>
 
           <div id="language-list">

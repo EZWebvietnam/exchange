@@ -242,6 +242,102 @@ class Member extends MY_Controller {
         $messsage = $this->load->view('email/' . $type . '-html', $data, TRUE);
         $this->maillinux->SendMail($from, $email, $subject, $messsage);
     }
+    public function history_log()
+    {
+        $id_user = $this->session->userdata('user_id');
+        $this->load->model('blance');
+        $this->load->helper('url');
+        $this->load->library('pagination');
+        $config['uri_segment'] = 5;
+        if ($this->uri->segment(4)) {
+            $page = $this->uri->segment(4);
+        } else {
+            $page = 1;
+        }
+        $config['per_page'] = 10;
+        $config['total_rows'] = $this->blance->count_transaction_history($id_user);
+        if ($page == '') {
+            $page = 1;
+        }
+        $page1 = ($page - 1) * $config['per_page'];
+        if (!is_numeric($page)) {
+            show_404();
+            exit;
+        }
+        $num_pages = ceil($config['total_rows'] / $config['per_page']);
+        $array_sv = $this->blance->load_transaction_history($id_user,$config['per_page'], $page1);
+        $this->data['total_page'] = $num_pages;
+        $this->data['offset'] = $page1;
+        $this->data['page'] = $page;
+        $this->data['total'] = $config['total_rows'];
+        $this->data['list_transaction'] = $array_sv;
+        $this->data['main_content']='transfer_log_view';
+        $this->load->view('home/layout_history_transfer',$this->data);
+    }
+    public function card_log()
+    {
+        $id_user = $this->session->userdata('user_id');
+        $this->load->model('blance');
+        $this->load->helper('url');
+        $this->load->library('pagination');
+        $config['uri_segment'] = 5;
+        if ($this->uri->segment(4)) {
+            $page = $this->uri->segment(4);
+        } else {
+            $page = 1;
+        }
+        $config['per_page'] = 10;
+        $config['total_rows'] = $this->blance->count_card_history($id_user);
+        if ($page == '') {
+            $page = 1;
+        }
+        $page1 = ($page - 1) * $config['per_page'];
+        if (!is_numeric($page)) {
+            show_404();
+            exit;
+        }
+        $num_pages = ceil($config['total_rows'] / $config['per_page']);
+        $array_sv = $this->blance->load_card_history($id_user,$config['per_page'], $page1);
+        $this->data['total_page'] = $num_pages;
+        $this->data['offset'] = $page1;
+        $this->data['page'] = $page;
+        $this->data['total'] = $config['total_rows'];
+        $this->data['list_transaction'] = $array_sv;
+        $this->data['main_content']='card_log_view';
+        $this->load->view('home/layout_history_transfer',$this->data);
+    }
+    public function transfer_system_log()
+    {
+       $id_user = $this->session->userdata('user_id');
+        $this->load->model('blance');
+        $this->load->helper('url');
+        $this->load->library('pagination');
+        $config['uri_segment'] = 5;
+        if ($this->uri->segment(4)) {
+            $page = $this->uri->segment(4);
+        } else {
+            $page = 1;
+        }
+        $config['per_page'] = 10;
+        $config['total_rows'] = $this->blance->count_transfer_system($id_user);
+        if ($page == '') {
+            $page = 1;
+        }
+        $page1 = ($page - 1) * $config['per_page'];
+        if (!is_numeric($page)) {
+            show_404();
+            exit;
+        }
+        $num_pages = ceil($config['total_rows'] / $config['per_page']);
+        $array_sv = $this->blance->load_transfer_system($id_user,$config['per_page'], $page1);
+        $this->data['total_page'] = $num_pages;
+        $this->data['offset'] = $page1;
+        $this->data['page'] = $page;
+        $this->data['total'] = $config['total_rows'];
+        $this->data['list_transaction'] = $array_sv;
+        $this->data['main_content']='transfer_system_log';
+        $this->load->view('home/layout_history_transfer',$this->data); 
+    }
 
 }
 

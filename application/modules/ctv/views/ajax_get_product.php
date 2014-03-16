@@ -31,7 +31,7 @@
                      <div class="h-title">User Management</div>
                   </td>
                   <td style="float: right;">
-                     <div class="addlink"><a href="<?php echo base_url(); ?>ctv/productctv/add_product" class="add grouped_elements"><span>Thêm mới</span></a></div>
+                     <div class="addlink"><a href="<?php echo base_url(); ?>ctv/systemctv/add_product" class="add grouped_elements"><span>Thêm mới</span></a></div>
                   </td>
                </tr>
             </table>
@@ -100,14 +100,14 @@
                         <td><?php echo $product_ref['email']?></td>
                         <td><?php echo date('d/m/Y h:i:s',strtotime($product_ref['created']));?></td>
                         <td align="center">
-                           <a class="delete_record" href="<?php echo base_url();?>ctv/systemctv/delete/<?php echo $product_ref['id']?>" title="Xóa"><img src="http://quanlybanhang.360vnit.com/app/templates/icon/del.png"></a>        
+                            <a class="add grouped_elements" href="<?php echo base_url();?>ctv/systemctv/account/<?php echo $product_ref['id']?>">Tài khoản</a><a class="delete_record" href="<?php echo base_url();?>ctv/systemctv/delete/<?php echo $product_ref['id']?>" title="Xóa"><img src="http://quanlybanhang.360vnit.com/app/templates/icon/del.png"></a>        
                         </td>
                      </tr>
                      <?php }?>       
                      <tfoot>
                         <td colspan="7">
                            <a class="del" onclick="return action_del('admindata_kh','khachhang');"><span>Xóa</span></a>                            
-                           Có <?php echo count($list_product_ref)?> khóa học 
+                           Có <?php echo count($list_product_ref)?> thành viên
                            <span class="pages">
                            <span class="pagebar-mainbody">
                            <?php 
