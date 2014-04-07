@@ -194,7 +194,6 @@
             $subject = $title;
             $messsage = $this->load->view('email/'.$type.'-html', $data, TRUE);
             $this->maillinux->SendMail($from,$email,$subject,$messsage);
-
         }
         public function change_pass()
         {
