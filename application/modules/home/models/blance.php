@@ -37,6 +37,13 @@
           $query = $this->db->query($sql);
           return $query->result_array();
       }
+      public function get_teller_log($transaction_log)
+      {
+          $sql="SELECT *,teller_log.id as teller_id_user,teller_log.password as pass_teller FROM teller_log WHERE teller_log.transaction_id = '$transaction_log' AND teller_log.status = 0 AND teller_log.exp_date >=now();";
+          
+          $query = $this->db->query($sql);
+          return $query->result_array();
+      }
       public function update_trans_log($id,array $data)
       {
           $this->db->where('id',$id);
@@ -83,6 +90,22 @@
           $query = $this->db->query($sql);
           return $query->result_array();
       }
+      public function count_teller_system($id_user)
+      {
+          $id_user = intval($id_user);
+          $sql="SELECT * FROM teller_log  WHERE teller_log.id_user = $id_user";
+          $query = $this->db->query($sql);
+          return count($query->result_array());
+      }
+      public function load_teller_system($id_user,$number,$offset)
+      {
+          $id_user = intval($id_user);
+          $number = intval($number);
+          $offset = intval($offset);
+          $sql="SELECT * FROM teller_log WHERE teller_log.id_user = $id_user LIMIT $offset,$number";
+          $query = $this->db->query($sql);
+          return $query->result_array();
+      }
       public function count_transfer_system($id_user)
       {
           $id_user = intval($id_user);
@@ -93,6 +116,17 @@
       public function insert_log_system(array $data)
       {
           $this->db->insert('log_system',$data);
+      }
+      public function insert_teller(array $data)
+      {
+          $this->db->insert('teller_log',$data);
+          return $this->db->insert_id();
+      }
+      public function update_teller($id,array $data)
+      {
+          $this->db->where('id',$id);
+          $this->db->update('teller_log',$data);
+          return $this->db->insert_id();
       }
   }
 ?>

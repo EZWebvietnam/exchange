@@ -52,7 +52,7 @@
                     </a>
                     <ul class='MenuDropDown'>
                         <li><a href="<?php echo base_url();?>thanh-vien/card">&nbsp;Nạp tiền</a></li>
-                        
+                        <li><a href="<?php echo base_url();?>thanh-vien/rut-tien">&nbsp;Rút tiền</a></li>
                         <li><a href="<?php echo base_url();?>thanh-vien/chuyen-tien">&nbsp;Chuyển tiền</a></li>
                     </ul>
                 </li>
@@ -62,8 +62,9 @@
                     </a>
                     <ul class='MenuDropDown'>
                         <li><a href="<?php echo base_url();?>thanh-vien/lich-su-chuyen-tien">&nbsp;Lịch sử Chuyển tiền</a></li>
-                        
+                        <li><a href="<?php echo base_url();?>thanh-vien/lich-su-rut-tien">&nbsp;Lịch sử Rút tiền</a></li>
                         <li><a href="<?php echo base_url();?>thanh-vien/lich-su-nap-the">&nbsp;Lịch sử Nạp thẻ</a></li>
+                        <li><a href="<?php echo base_url();?>thanh-vien/lich-su-he-thong">&nbsp;Lịch sử Hệ thống</a></li>
                     </ul>
                 </li>
             </ul>

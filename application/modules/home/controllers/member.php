@@ -202,6 +202,87 @@ class Member extends MY_Controller {
         }
         
     }
+    public function teller()
+    {
+        if($this->input->post())
+        {
+            $this->form_validation->set_rules('money', 'Card', 'trim|xss_clean|callback_check_money[money]');
+            if($this->form_validation->run())
+            {
+                
+                $id_user = $this->session->userdata('user_id');
+                $user_detail = $this->users->get_user_by_id($id_user, 1);
+                $money = $this->input->post('money');
+                $account_number = $this->input->post('account_number');
+                $bank = $this->input->post('bank');
+                $status = 0;
+                $password = rand_string(6);
+                $transaction_id = rand_string(6);
+                $newtimestamp = strtotime('now + 10 minute');
+                $data_save = array(
+                    'id_user'=>$id_user,
+                    'money'=>$money,
+                    'bank_id'=>$account_number,
+                    'transaction_id'=>$transaction_id,
+                    'bank'=>$bank,
+                    'status'=>$status,
+                    'password'=>$this->tank_auth->has_password($password),
+                    'exp_date' => date('Y-m-d h:i:s', $newtimestamp),
+                    'create_date'=>  strtotime('now')
+                );
+                $this->load->model('blance');
+                $id = $this->blance->insert_teller($data_save);
+                
+                if($id>0)
+                {
+                    $data_mail = array('user' => $this->session->userdata('username'), 'password' => $password, 'transaction_code' => $transaction_id, 'money' => $money);
+                    $this->_send_email('transfer', $user_detail->email, $user_detail->email, $data_mail, 'Mật khẩu xác nhận giao dịch');
+                    redirect('/thanh-vien/rut-tien/login/' . $transaction_id);
+                }
+            }
+        }
+        $this->data['main_content']='teller_view';
+        $this->load->view('home/layout_changepass',$this->data);
+    }
+    public function confirm_teller() {
+        $transaction_id = $this->uri->segment(4);
+        if(empty($transaction_id))
+        {
+            show_404();
+            exit;
+        }
+        $transaction_id = addslashes($transaction_id);
+        $this->data['transaction_id'] = $transaction_id;
+        $this->form_validation->set_rules('transaction_id','transaction', 'trim|xss_clean');
+        $this->form_validation->set_rules('pass_access','pass', 'trim|xss_clean|callback_check_pass_access_teller['.$transaction_id.']');
+        if($this->form_validation->run())
+        {
+            redirect('/thanh-vien/rut-tien/cofirm/'.$transaction_id);
+        }
+        $this->data['main_content'] = 'login_chuyen_tien_view';
+        $this->load->view('home/layout_changepass',$this->data);
+    }
+    public function confirm_tellers()
+    {
+        $transaction_id = $this->uri->segment(4);
+        if(empty($transaction_id))
+        {
+            show_404();
+            exit;
+        }
+        $transaction_id = addslashes($transaction_id);
+        $account_detail = $this->blance->get_teller_log($transaction_id);
+        if(empty($account_detail))
+        {
+            show_404();
+            exit;
+        }
+        $status = 1;
+        $data_save = array('status'=>1);
+        $this->blance->update_teller($account_detail[0]['teller_id_user'],$data_save);
+        redirect('/thanh-vien');
+        $this->load->model('blance');
+    }
     public function check_account($account_number) {
         $this->load->model('users');
         $account_detail = $this->users->get_user_by_account_number($account_number);
@@ -217,6 +298,16 @@ class Member extends MY_Controller {
        $transaction_id = addslashes($transaction_id);
         if ($this->tank_auth->check_password_trans($pass, $transaction_id)==FALSE) {
             $this->form_validation->set_message('check_pass_access', 'Pass Incorrect');
+            return FALSE;
+        } else {
+            return $transaction_id;
+        }
+    }
+    public function check_pass_access_teller($pass) {
+       $transaction_id = $this->uri->segment(4);
+       $transaction_id = addslashes($transaction_id);
+        if ($this->tank_auth->check_password_teller($pass, $transaction_id)==FALSE) {
+            $this->form_validation->set_message('check_pass_access_teller', 'Pass Incorrect');
             return FALSE;
         } else {
             return $transaction_id;
@@ -338,7 +429,38 @@ class Member extends MY_Controller {
         $this->data['main_content']='transfer_system_log';
         $this->load->view('home/layout_history_transfer',$this->data); 
     }
-
+    public function transfer_teller_log()
+    {
+       $id_user = $this->session->userdata('user_id');
+        $this->load->model('blance');
+        $this->load->helper('url');
+        $this->load->library('pagination');
+        $config['uri_segment'] = 5;
+        if ($this->uri->segment(4)) {
+            $page = $this->uri->segment(4);
+        } else {
+            $page = 1;
+        }
+        $config['per_page'] = 10;
+        $config['total_rows'] = $this->blance->count_teller_system($id_user);
+        if ($page == '') {
+            $page = 1;
+        }
+        $page1 = ($page - 1) * $config['per_page'];
+        if (!is_numeric($page)) {
+            show_404();
+            exit;
+        }
+        $num_pages = ceil($config['total_rows'] / $config['per_page']);
+        $array_sv = $this->blance->load_teller_system($id_user,$config['per_page'], $page1);
+        $this->data['total_page'] = $num_pages;
+        $this->data['offset'] = $page1;
+        $this->data['page'] = $page;
+        $this->data['total'] = $config['total_rows'];
+        $this->data['list_transaction'] = $array_sv;
+        $this->data['main_content']='teller_log';
+        $this->load->view('home/layout_history_transfer',$this->data); 
+    }
 }
 
 ?>

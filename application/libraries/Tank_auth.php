@@ -44,9 +44,26 @@ class Tank_auth {
     }
     public function check_password_trans($password,$transaction_id) {
         $this->ci->load->model('home/blance');
+        
         $account_detail = $this->ci->blance->get_transaction_log($transaction_id);
         $password = md5(base64_encode($password));
         $pass_trans = $account_detail[0]['pass_trans'];
+        
+        if($password !=$pass_trans )
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
+    public function check_password_teller($password,$transaction_id) {
+        $this->ci->load->model('home/blance');
+        
+        $account_detail = $this->ci->blance->get_teller_log($transaction_id);
+        $password = md5(base64_encode($password));
+        $pass_trans = $account_detail[0]['pass_teller'];
         
         if($password !=$pass_trans )
         {
